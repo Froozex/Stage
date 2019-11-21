@@ -11,9 +11,9 @@
      <jsp:include page="header.jsp"></jsp:include>
      <jsp:include page="menu.jsp"></jsp:include>
     
-      <h3>Home Page</h3>
+      <h3>Forensics Data Manager</h3>
       
-      This is demo Simple web application using jsp,servlet &amp; Jdbc. <br><br>
+      Gestisci qui i tuoi fascicoli forensi! <br><br>
       <b>It includes the following functions:</b>
       <ul>
          <li>Login</li>

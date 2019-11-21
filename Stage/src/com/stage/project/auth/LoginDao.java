@@ -12,7 +12,7 @@ public String authenticateUser(LoginBean loginBean)
 
 String userName = loginBean.getUserName(); //Keeping user entered values in temporary variables.
 String password = loginBean.getPassword();
-
+System.out.println("Avvio!");
 Connection conn = null;
 Statement statement = null;
 ResultSet resultSet = null;
@@ -22,9 +22,11 @@ String passwordDB = "";
 
 try
 {
-conn = DBConnection.createConnection(); //establishing connection
+conn = DBConnection.createConnection();
+System.out.println("Connessione Stabilita!");//establishing connection
 statement = conn.createStatement(); //Statement is used to write queries. Read more about it.
-resultSet = statement.executeQuery("select userName,password from users"); //Here table name is users and userName,password are columns. fetching all the records and storing in a resultSet.
+resultSet = statement.executeQuery("select userName,password from users");
+System.out.println("Query chiamata!");//Here table name is users and userName,password are columns. fetching all the records and storing in a resultSet.
 
 while(resultSet.next()) // Until next row is present otherwise it return false
 {

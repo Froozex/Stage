@@ -15,24 +15,27 @@ import com.stage.project.auth.RegisterDao;
 @WebServlet(urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
  
-	private static final long serialVersionUID = 1L;
-	
-	public RegisterServlet() {
+    private static final long serialVersionUID = 1L;
+    
+    public RegisterServlet() {
 
-	}
-	
-	 @Override
-	   protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	           throws ServletException, IOException {
-	 
-	       
-	       RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/register.jsp");
-	        
-	       dispatcher.forward(request, response);
-	 }
- 
+    }
+    
+     @Override
+       protected void doGet(HttpServletRequest request, HttpServletResponse response)
+               throws ServletException, IOException {
+     
+           
+           RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/register.jsp");
+            
+           dispatcher.forward(request, response);
+           System.out.println("Request effettuato!");
+     }
+     
  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  //Copying all the input parameters in to local variables
+     
+     System.out.println("Post access!");
  String fullName = request.getParameter("fullname");
  String email = request.getParameter("email");
  String userName = request.getParameter("username");
@@ -46,6 +49,7 @@ public class RegisterServlet extends HttpServlet {
  registerBean.setPassword(password); 
  
  RegisterDao registerDao = new RegisterDao();
+ System.out.println("Post Register effettuato!");
  
  //The core Logic of the Registration application is present here. We are going to insert user data in to the database.
  String userRegistered = registerDao.registerUser(registerBean);
@@ -53,11 +57,13 @@ public class RegisterServlet extends HttpServlet {
  if(userRegistered.equals("SUCCESS"))   //On success, you can display a message to user on Home page
  {
  request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
+ System.out.println("Registrazione completata!");
  }
  else   //On Failure, display a meaningful message to the User.
  {
  request.setAttribute("errMessage", userRegistered);
  request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+ System.out.println("Registrazione errata!");
  }
  }
 }
