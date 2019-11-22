@@ -7,10 +7,10 @@
      <title>Home Page</title>
   </head>
   <body>
- 
-     <jsp:include page="header.jsp"></jsp:include>
-     <jsp:include page="menu.jsp"></jsp:include>
-    
+  
+  		<h2>Benvenuto <%=request.getAttribute("userName") %></h2>
+  		
+  		
       <h3>Forensics Data Manager</h3>
       
       Gestisci qui i tuoi fascicoli forensi! <br><br>

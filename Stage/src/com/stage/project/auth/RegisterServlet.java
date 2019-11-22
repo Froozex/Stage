@@ -56,7 +56,7 @@ public class RegisterServlet extends HttpServlet {
  
  if(userRegistered.equals("SUCCESS"))   //On success, you can display a message to user on Home page
  {
- request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
+ request.getRequestDispatcher("/WEB-INF/views/index.html").forward(request, response);
  System.out.println("Registrazione completata!");
  }
  else   //On Failure, display a meaningful message to the User.
