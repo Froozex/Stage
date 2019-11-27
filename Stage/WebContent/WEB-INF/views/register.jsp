@@ -14,29 +14,29 @@ function validate()
  var password = document.form.password.value;
  var conpassword= document.form.conpassword.value;
  
- if (fullname==null || fullname=="")
+ if (fullname==null || fullname=="" || !fullname.contains(" "))
  { 
- alert("Full Name can't be blank"); 
+ alert("Inserisci un Nome e Cognome");
  return false; 
  }
- else if (email==null || email=="")
+ else if (email==null || email=="" || !email.contains("@"))
  { 
- alert("Email can't be blank"); 
+ alert("Inserisci un indirizzo Email corretto!"); 
  return false; 
  }
  else if (username==null || username=="")
  { 
- alert("Username can't be blank"); 
+ alert("Inserisci un Username."); 
  return false; 
  }
  else if(password.length<6)
  { 
- alert("Password must be at least 6 characters long."); 
+ alert("La password deve essere lunga almeno 6 caratteri"); 
  return false; 
  } 
  else if (password!=conpassword)
  { 
- alert("Confirm Password should match with the Password"); 
+ alert("La Password scelta e quella di conferma sono diverse!"); 
  return false; 
  } 
  } 
@@ -45,35 +45,35 @@ function validate()
 <body>
 <center><h2>Registrazione </h2></center>
 <form name="form" action="register" method="post" onsubmit="return validate()">
-    <table align="center">
-      <tr>
-      <td>Nome e Cognome</td>
-     <td><input type="text" name="fullname" /></td>
-     </tr>
-     <tr>
-     <td>Email</td>
-     <td><input type="text" name="email" /></td>
-     </tr>
-     <tr>
-     <td>Username</td>
-     <td><input type="text" name="username" /></td>
-     </tr>
-     <tr>
-     <td>Password</td>
-     <td><input type="password" name="password" /></td>
-     </tr>
-     <tr>
-     <td>Conferma Password</td>
-     <td><input type="password" name="conpassword" /></td>
-     </tr>
-     <tr>
-     <td><%=(request.getAttribute("errMessage") == null) ? ""
-     : request.getAttribute("errMessage")%></td>
-     </tr>
-     <tr>
-     <td></td>
-     <td><input type="submit" value="Registrati"></input><input
-     type="reset" value="Reset"></input></td>
+	<table align="center">
+  	<tr>
+  	<td>Nome e Cognome</td>
+	 <td><input type="text" name="fullname" /></td>
+	 </tr>
+	 <tr>
+	 <td>Email</td>
+	 <td><input type="text" name="email" /></td>
+	 </tr>
+	 <tr>
+	 <td>Username</td>
+	 <td><input type="text" name="username" /></td>
+	 </tr>
+	 <tr>
+	 <td>Password</td>
+	 <td><input type="password" name="password" /></td>
+ 	</tr>
+ 	<tr>
+ 	<td>Conferma Password</td>
+ 	<td><input type="password" name="conpassword" /></td>
+ 	</tr>
+ 	<tr>
+ 	<td><%=(request.getAttribute("errMessage") == null) ? ""
+	 : request.getAttribute("errMessage")%></td>
+ 	</tr>
+ 	<tr>
+ 	<td></td>
+ 	<td><input type="submit" value="Registrati"></input><input
+ 	type="reset" value="Reset"></input></td>
  </tr>
 </table>
 </form>

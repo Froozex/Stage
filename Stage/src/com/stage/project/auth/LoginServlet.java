@@ -14,11 +14,11 @@ import com.stage.project.auth.LoginBean;
  
 @WebServlet(urlPatterns = {"/login"})
  public class LoginServlet extends HttpServlet {
-    
-    private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 1L;
  
 public LoginServlet() {
-     }
+ 	}
 
 
 @Override
@@ -34,8 +34,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
  
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //Here username and password are the names which I have given in the input box in Login.jsp page. Here I am retrieving the values entered by the user and keeping in instance variables for further use.
-     System.out.println("Pagina caricata con successo!");
-     
+	 System.out.println("Pagina caricata con successo!");
+	 
 String userName = request.getParameter("username");
  String password = request.getParameter("password");
  
@@ -52,14 +52,14 @@ String userValidate = loginDao.authenticateUser(loginBean); //Calling authentica
  
 if(userValidate.equals("SUCCESS")) //If function returns success string then user will be rooted to Home page
  {
-     
+	 
  request.setAttribute("userName", userName); //with setAttribute() you can define a "key" and value pair so that you can get it in future using getAttribute("key")
  request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
  }
  else
  {
-     
-     System.out.println("Errore!");
+	 
+	 System.out.println("Errore!");
  request.setAttribute("errMessage", userValidate); //If authenticateUser() function returns other than SUCCESS string it will be sent to Login page again. Here the error message returned from function has been stored in a errMessage key.
  request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);//forwarding the request
  }

@@ -7,24 +7,32 @@
      <title>Home Page</title>
   </head>
   <body>
-  
-  		<h2>Benvenuto <%=request.getAttribute("userName") %></h2>
-  		
-  		
-      <h3>Forensics Data Manager</h3>
+ 
+     <jsp:include page="header.jsp"></jsp:include>
+     <jsp:include page="menu.jsp"></jsp:include>
+    
+      <h3>Benvenuto<b> <%=request.getAttribute("userName") %>!</b></h3>
       
       Gestisci qui i tuoi fascicoli forensi! <br><br>
-      <b>It includes the following functions:</b>
-      <ul>
-         <li>Login</li>
-         <li>Storing user information in cookies</li>
-         <li>Product List</li>
-         <li>Create Product</li>
-         <li>Edit Product</li>
-         <li>Delete Product</li>
-      </ul>
+
+
+<!-- Do not use table to format fields. As a good practice use CSS -->
+<table align="center">
+ <tr>
+ <td></td>
+ <td><form name="form" action="FascicoloServlet" method="post">
+ <input type="submit" value="Gestione fascicoli."></input></form></td>
+ </tr>
+  <tr>
+ <td></td>
+ <td></td>
+ </tr>
  
-     <jsp:include page="footer.jsp"></jsp:include>
- 
+     
+   </table>
+  
+  <jsp:include page="footer.jsp"></jsp:include>
   </body>
+
+  
 </html>

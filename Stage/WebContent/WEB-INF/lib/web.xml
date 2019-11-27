@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xmlns="http://java.sun.com/xml/ns/javaee"
+      xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
                        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
      id="WebApp_ID" version="3.0">
  <display-name>Forensics Data Manager</display-name>
+ 
+ <context-param>
+        <param-name>jdbcURL</param-name>
+        <param-value>jdbc:mysql://localhost:3306/users</param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>jdbcUsername</param-name>
+        <param-value>root</param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>jdbcPassword</param-name>
+        <param-value>ludovico97</param-value>
+    </context-param>
  
  
  <welcome-file-list>
@@ -20,6 +36,8 @@
  <servlet-name>Home</servlet-name>
  <url-pattern>/home</url-pattern>
  </servlet-mapping>
+ 
+ 
  <servlet>
  <description></description>
  <display-name>RegisterServlet</display-name>
@@ -28,8 +46,10 @@
  </servlet>
  <servlet-mapping>
  <servlet-name>RegisterServlet</servlet-name>
- <url-pattern>/register</url-pattern>
+ <url-pattern></url-pattern>
  </servlet-mapping>
+ 
+ 
  <servlet>
  <description></description>
  <display-name>LoginServlet</display-name>
@@ -38,8 +58,18 @@
  </servlet>
  <servlet-mapping>
  <servlet-name>LoginServlet</servlet-name>
- <url-pattern>/login</url-pattern>
+ <url-pattern></url-pattern>
  </servlet-mapping>
  
  
+ <servlet>
+ <description></description>
+ <display-name>FascicoloServlet</display-name>
+ <servlet-name>FascicoloServlet</servlet-name>
+ <servlet-class>com.stage.project.data.FascicoloServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>FascicoloServlet</servlet-name>
+ <url-pattern>/FascicoloServlet</url-pattern>
+ </servlet-mapping>
 </web-app>
