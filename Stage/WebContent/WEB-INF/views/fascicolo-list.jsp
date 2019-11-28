@@ -11,9 +11,9 @@
  <center>
   <h1>Fascicoli</h1>
         <h2>
-         <a href="new">Aggiungi nuovo fascicolo</a>
+         <a href="newfascicolo">Aggiungi nuovo fascicolo</a>
          &nbsp;&nbsp;&nbsp;
-         <a href="list">Tutti i fascicoli</a>
+         <a href="fascicoli">Tutti i fascicoli</a>
          
         </h2>
  </center>
@@ -21,7 +21,7 @@
         <table border="1" cellpadding="5">
             <caption><h2>Lista Fascicoli</h2></caption>
             <tr>
-                <th></th>
+                
                 <th>Nomina</th>
                 <th>Procura</th>
                 <th>Pubblico Ministero</th>
@@ -65,7 +65,7 @@
                     <td><c:out value="${fasc.relazione}" /></td>
                     <td><c:out value="${fasc.costo}" /></td>
                     <td><c:out value="${fasc.pagamento}" /></td>
-                    <td><a href="edit?id=<c:out value='${fasc.id}' />">Visualizza reperti</a></td>
+                    <td><a href="editfascicolo?id=<c:out value='${fasc.id}' />">Visualizza reperti</a></td>
                 </tr>
             </c:forEach>
         </table>

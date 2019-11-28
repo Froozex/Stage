@@ -10,8 +10,8 @@ public class DBConnection {
  
 	 Connection conn = null;
 	 String url = "jdbc:mysql://localhost:3306/utenti?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"; //MySQL URL followed by the database name
-	 String username = "root"; //MySQL username [da cambiare]
-	 String password = "ludovico97"; //MySQL password [da cambiare]
+	 String username = "root"; //MySQL username
+	 String password = "ludovico97"; //MySQL password
  
 	 try 
 	 {

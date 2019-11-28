@@ -11,9 +11,9 @@
  <center>
   <h1>Fascicolo Manager</h1>
         <h2>
-         <a href="new">Aggiungi Un Nuovo Fascicolo</a>
+         <a href="newfascicolo">Aggiungi Un Nuovo Fascicolo</a>
          &nbsp;&nbsp;&nbsp;
-         <a href="list">Lista Fascicoli</a>
+         <a href="fascicoli">Lista Fascicoli</a>
          
         </h2>
  </center>

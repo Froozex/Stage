@@ -20,8 +20,9 @@
 <table align="center">
  <tr>
  <td></td>
- <td><form name="form" action="FascicoloServlet" method="post">
- <input type="submit" value="Gestione fascicoli."></input></form></td>
+ 
+ 
+ <a href="fascicoli">Gestione Fascicoli</a>
  </tr>
   <tr>
  <td></td>
