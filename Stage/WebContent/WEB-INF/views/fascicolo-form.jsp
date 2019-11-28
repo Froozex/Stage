@@ -19,10 +19,10 @@
  </center>
     <div align="center">
   <c:if test="${fasc != null}">
-   <form action="update" method="post">
+   <form action="updatefascicolo" method="post">
         </c:if>
         <c:if test="${fasc == null}">
-   <form action="insert" method="post">
+   <form action="insertfascicolo" method="post">
         </c:if>
         <table border="1" cellpadding="5">
             <caption>
