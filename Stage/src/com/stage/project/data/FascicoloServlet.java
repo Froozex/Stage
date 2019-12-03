@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet({"/"})
+@WebServlet({"/fascicoli", "/newfascicolo", "/insertfascicolo", "/deletefascicolo", "/editfascicolo", "/updatefascicolo"})
 public class FascicoloServlet extends HttpServlet {
    
 	private static final long serialVersionUID = 1L;
@@ -52,7 +52,8 @@ public class FascicoloServlet extends HttpServlet {
             else if(action.equals("/insertfascicolo")) {
             	insertFascicolo(request, response);}
             else if(action.equals("/deletefascicolo")) {
-            	deleteFascicolo(request, response);}
+            	deleteFascicolo(request, response);
+            	System.out.println("entra in elimina");}
             else if(action.equals("/editfascicolo")) {
             	editFascicolo(request, response);}
             else if(action.equals("/updatefascicolo")) {
@@ -100,7 +101,7 @@ public class FascicoloServlet extends HttpServlet {
 
     private void editFascicolo(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, ServletException, IOException {
-        String nomina_id = request.getParameter("Nomina");
+        String nomina_id = request.getParameter("nomina");
         FascicoloInfo existingFasc = fascicoloDao.getFascicolo(nomina_id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/fascicolo-form.jsp");
         request.setAttribute("fasc", existingFasc);
@@ -111,7 +112,12 @@ public class FascicoloServlet extends HttpServlet {
     private void insertFascicolo(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {
     	
-    	 int id = Integer.parseInt(request.getParameter("id"));
+    	int id = 0;
+    	if(request.getParameter("id")=="" || request.getParameter("id")==null) {
+    		id = 0;
+    	} else id = Integer.parseInt(request.getParameter("id"));
+    	
+    	
     	 String nomina = request.getParameter("nomina");
          String procura = request.getParameter("procura");
          String pm = request.getParameter("pm");
@@ -132,11 +138,12 @@ public class FascicoloServlet extends HttpServlet {
 
          FascicoloInfo newfasc = new FascicoloInfo(id, nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, relazione, costo, pagamento);
          fascicoloDao.insertFascicolo(newfasc);
-     	 response.sendRedirect("fascicoli/list");
+     	 response.sendRedirect("fascicoli");
     }
 
     private void updateFascicolo(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {
+    	
     	
         String nomina = request.getParameter("nomina");
         String procura = request.getParameter("procura");
@@ -157,17 +164,17 @@ public class FascicoloServlet extends HttpServlet {
         String pagamento = request.getParameter("pagamento");
 
         FascicoloInfo fasc = new FascicoloInfo(nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico,
-					d_inizio, giorni, scadenza, proroga, richiesta,relazione,costo,pagamento);
+					d_inizio, giorni, scadenza, proroga, richiesta, relazione, costo, pagamento);
         fascicoloDao.updateFascicolo(fasc);
-        response.sendRedirect("fascicoli/list");
+        response.sendRedirect("fascicoli");
     }
 
     private void deleteFascicolo(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {
-        String nomina_id = request.getParameter("Nomina");
+        String nomina = request.getParameter("nomina");
         
-        FascicoloInfo  fasc = new FascicoloInfo(nomina_id);
+        FascicoloInfo  fasc = new FascicoloInfo(nomina);
         fascicoloDao.deleteFascicolo(fasc);
-        response.sendRedirect("fascicoli/list");
+        response.sendRedirect("fascicoli");
     }
 }

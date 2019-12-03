@@ -69,7 +69,7 @@
  </servlet>
  <servlet-mapping>
  <servlet-name>FascicoloServlet</servlet-name>
- <url-pattern>/</url-pattern>
+ <url-pattern>/fascioli</url-pattern>
  
  </servlet-mapping>
 </web-app>

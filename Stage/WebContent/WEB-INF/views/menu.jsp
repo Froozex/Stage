@@ -3,9 +3,9 @@
     
 <div style="padding: 5px;">
    
-   <a href="${pageContext.request.contextPath}/userInfo">Account</a>
+   <a href="userInfo">Account</a>
    |
-   <a href="${pageContext.request.contextPath}/login">Accedi</a>
+   <a href="logout">Esci</a>
    
 
 </div>  

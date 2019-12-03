@@ -21,8 +21,9 @@
  <tr>
  <td></td>
  
+ <form name="form" action="fascicoli" method="post" ">
+ <input type="submit" value="Gestione fascicoli"></input></form>
  
- <a href="fascicoli">Gestione Fascicoli</a>
  </tr>
   <tr>
  <td></td>

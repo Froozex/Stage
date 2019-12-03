@@ -47,7 +47,7 @@ public class FascicoloDao {
     
     public boolean insertFascicolo(FascicoloInfo fasc) throws SQLException {
     	
-    	String sql = "INSERT INTO fascicolo (Nomina, Pubblico Ministero, Polizia Giudiziaria, Indagato, Reato, Consulente, Ausiliario, Data Affidamento Incarico, Data Inizio Operazioni, Giorni Concessi, Proroga, Richiesta a Gestori, Relazione, Richiesta Spese, Pagamento Avvenuto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    	String sql = "INSERT INTO fascicolo (nomina, procura, pubblico_ministero, polizia_giudiziaria, indagato, reato, consulente, ausiliario, data_affidamento_incarico, data_inizio_operazioni, giorni_concessi, scadenza, proroga, richiesta_gestori, relazione, richiesta_spese, pagamento_avvenuto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     	connect();
     	
     	PreparedStatement statement = jdbcConnection.prepareStatement(sql);
@@ -80,7 +80,7 @@ public class FascicoloDao {
      * @param fasc
      */
     public boolean updateFascicolo(FascicoloInfo fasc) throws SQLException {
-        String sql = "UPDATE fascicolo SET Nomina = ?, Pubblico Ministero = ?, Polizia Giudiziaria = ?, Indagato = ?, Reato = ?, Consulente = ?, Ausiliario = ?, Data Affidamento Incarico = ?, Data Inizio Operazioni = ?, Giorni Concessi = ?, Proroga = ?, Richiesta a Gestori = ?, Relazione = ?, Richiesta Spese = ?, Pagamento Avvenuto = ?";
+        String sql = "UPDATE fascicolo SET nomina = ?, procura = ?, pubblico_ministero = ?, polizia_giudiziaria = ?, indagato = ?, reato = ?, consulente = ?, ausiliario = ?, data_affidamento_incarico = ?, data_inizio_operazioni = ?, giorni_concessi = ?, scadenza = ?, proroga = ?, richiesta_gestori = ?, relazione = ?, richiesta_spese = ?, pagamento_avvenuto = ?";
         connect();
          
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
@@ -113,7 +113,7 @@ public class FascicoloDao {
      * @param nomina
      */
         public boolean deleteFascicolo(FascicoloInfo fasc) throws SQLException {
-            String sql = "DELETE FROM fascicolo where Nomina = ?";
+            String sql = "DELETE FROM fascicolo where nomina = ?";
              
             connect();
              
@@ -128,12 +128,12 @@ public class FascicoloDao {
 
     /**
      * Get fascicoli By ID
-     * @param id
+     * @param nomina
      * @return
      */
     public FascicoloInfo getFascicolo(String nomina_id) throws SQLException {
         FascicoloInfo fasc = null;
-        String sql = "SELECT * FROM fascicolo WHERE Nomina = ?";
+        String sql = "SELECT * FROM fascicolo WHERE nomina = ?";
          
         connect();
          
@@ -143,23 +143,23 @@ public class FascicoloDao {
         ResultSet resultSet = statement.executeQuery();
          
         if (resultSet.next()) {
-        	String nomina = resultSet.getString("Nomina");
-        	String procura = resultSet.getString("Procura");
-        	String pm = resultSet.getString("Pubblico Ministero");
-        	String pg = resultSet.getString("Polizia Giudiziaria");
-        	String indagato = resultSet.getString("Indagato");
-        	String reato = resultSet.getString("Reato");
-        	String consulente = resultSet.getString("Consulente");
-        	String ausiliario = resultSet.getString("Ausiliario");
-        	String d_incarico = resultSet.getString("Data Affidamento Incarico");
-        	String d_inizio = resultSet.getString("Data Inizio Operazioni");
-        	int giorni = resultSet.getInt("Giorni Concessi");
-        	String scadenza = resultSet.getString("Scadenza");
-        	int proroga = resultSet.getInt("Proroga");
-        	String richiesta = resultSet.getString("Richiesta a Gestori");
-        	String relazione = resultSet.getString("Relazione");
-        	String costo = resultSet.getString("Richiesta Spesa");
-        	String pagamento = resultSet.getString("Pagamento Avvenuto");
+        	String nomina = resultSet.getString("nomina");
+        	String procura = resultSet.getString("procura");
+        	String pm = resultSet.getString("pubblico_ministero");
+        	String pg = resultSet.getString("polizia_giudiziaria");
+        	String indagato = resultSet.getString("indagato");
+        	String reato = resultSet.getString("reato");
+        	String consulente = resultSet.getString("consulente");
+        	String ausiliario = resultSet.getString("ausiliario");
+        	String d_incarico = resultSet.getString("data_affidamento_incarico");
+        	String d_inizio = resultSet.getString("data_inizio_operazioni");
+        	int giorni = resultSet.getInt("giorni_concessi");
+        	String scadenza = resultSet.getString("scadenza");
+        	int proroga = resultSet.getInt("proroga");
+        	String richiesta = resultSet.getString("richiesta_gestori");
+        	String relazione = resultSet.getString("relazione");
+        	String costo = resultSet.getString("richiesta_spese");
+        	String pagamento = resultSet.getString("pagamento_avvenuto");
         	
         	fasc = new FascicoloInfo(nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, relazione, costo, pagamento);
         	
@@ -180,7 +180,7 @@ public class FascicoloDao {
 
     	List<FascicoloInfo> listFasc = new ArrayList<>();
         
-        String sql = "SELECT * FROM fascicolo";
+        String sql = "SELECT * FROM utenti.fascicolo";
          
         connect();
          
@@ -189,25 +189,26 @@ public class FascicoloDao {
         
         while(resultSet.next()) {
         	
-        	String nomina = resultSet.getString("Nomina");
-        	String procura = resultSet.getString("Procura");
-        	String pm = resultSet.getString("Pubblico Ministero");
-        	String pg = resultSet.getString("Polizia Giudiziaria");
-        	String indagato = resultSet.getString("Indagato");
-        	String reato = resultSet.getString("Reato");
-        	String consulente = resultSet.getString("Consulente");
-        	String ausiliario = resultSet.getString("Ausiliario");
-        	String d_incarico = resultSet.getString("Data Affidamento Incarico");
-        	String d_inizio = resultSet.getString("Data Inizio Operazioni");
-        	int giorni = resultSet.getInt("Giorni Concessi");
-        	String scadenza = resultSet.getString("Scadenza");
-        	int proroga = resultSet.getInt("Proroga");
-        	String richiesta = resultSet.getString("Richiesta a Gestori");
-        	String relazione = resultSet.getString("Relazione");
-        	String costo = resultSet.getString("Richiesta Spesa");
-        	String pagamento = resultSet.getString("Pagamento Avvenuto");
+        	int id = resultSet.getInt("id");
+        	String nomina = resultSet.getString("nomina");
+        	String procura = resultSet.getString("procura");
+        	String pm = resultSet.getString("pubblico_ministero");
+        	String pg = resultSet.getString("polizia_giudiziaria");
+        	String indagato = resultSet.getString("indagato");
+        	String reato = resultSet.getString("reato");
+        	String consulente = resultSet.getString("consulente");
+        	String ausiliario = resultSet.getString("ausiliario");
+        	String d_incarico = resultSet.getString("data_affidamento_incarico");
+        	String d_inizio = resultSet.getString("data_inizio_operazioni");
+        	int giorni = resultSet.getInt("giorni_concessi");
+        	String scadenza = resultSet.getString("scadenza");
+        	int proroga = resultSet.getInt("proroga");
+        	String richiesta = resultSet.getString("richiesta_gestori");
+        	String relazione = resultSet.getString("relazione");
+        	String costo = resultSet.getString("richiesta_spese");
+        	String pagamento = resultSet.getString("pagamento_avvenuto");
         	
-        	FascicoloInfo fasc = new FascicoloInfo(nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, relazione, costo, pagamento);
+        	FascicoloInfo fasc = new FascicoloInfo(id, nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, relazione, costo, pagamento);
         	listFasc.add(fasc);
         }
         

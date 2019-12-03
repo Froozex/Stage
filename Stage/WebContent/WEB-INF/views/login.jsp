@@ -13,21 +13,21 @@ function validate()
  
  if (username==null || username=="")
  { 
- alert("Username cannot be blank"); 
+ alert("Inserire un username!"); 
  return false; 
  }
  else if(password==null || password=="")
  { 
- alert("Password cannot be blank"); 
+ alert("Inserire una password!"); 
  return false; 
  } 
 }
 </script> 
 </head>
 <body>
-<div style="text-align:center"><h1>Login </h1> </div>
+<div style="text-align:center"><h1>Accedi </h1> </div>
 <br>
-<form name="form" action="login" method="post" onsubmit="return validate()">
+<form name="form" action="home" method="post" onsubmit="return validate()">
 <!-- Do not use table to format fields. As a good practice use CSS -->
 <table align="center">
  <tr>

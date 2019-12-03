@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -6,11 +7,33 @@
 <html>
 <head>
  <title>Fascicolo Manager</title>
+ 
+ <script> 
+function validate()
+{ 
+ var nomina = document.form.nomina.value; 
+ var procura = document.form.procura.value;
+ 
+ if (nomina==null || nomina=="")
+ { 
+ alert("Inserire la nomina!"); 
+ return false; 
+ }
+ else if(procura==null || procura=="")
+ { 
+ alert("Inserire la procura!"); 
+ return false; 
+ } 
+}
+</script> 
+ 
 </head>
 <body>
  <center>
   <h1>Fascicolo Manager</h1>
         <h2>
+        <a href="home">Home Page</a>
+        &nbsp;&nbsp;&nbsp;
          <a href="newfascicolo">Aggiungi Un Nuovo Fascicolo</a>
          &nbsp;&nbsp;&nbsp;
          <a href="fascicoli">Lista Fascicoli</a>
@@ -19,10 +42,10 @@
  </center>
     <div align="center">
   <c:if test="${fasc != null}">
-   <form action="updatefascicolo" method="post">
+   <form action="updatefascicolo" method="post" onsubmit="return validate()">
         </c:if>
         <c:if test="${fasc == null}">
-   <form action="insertfascicolo" method="post">
+   <form action="insertfascicolo" method="post" onsubmit="return validate()">
         </c:if>
         <table border="1" cellpadding="5">
             <caption>
@@ -148,7 +171,7 @@
                 <tr>
                 <th>Richiesta Spese: </th>
                 <td>
-                 <input type="text" name="costo" size="45"
+                 <input type="text" name="richiesta" size="45"
                    value="<c:out value='${fasc.costo}' />"
                  />
                 </td>
@@ -156,7 +179,7 @@
                 <th>Pagamento avvenuto: </th>
                 <td>
                  <input type="text" name="costo" size="2"
-                   value="<c:out value='${fasc.costo}' />"
+                   value="<c:out value='${fasc.pagamento}' />"
                  />
                 </td>
             <tr>
