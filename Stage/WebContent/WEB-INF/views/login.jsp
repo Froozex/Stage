@@ -5,26 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
-<script> 
-function validate()
-{ 
- var username = document.form.username.value; 
- var password = document.form.password.value;
- 
- if (username==null || username=="")
- { 
- alert("Inserire un username!"); 
- return false; 
- }
- else if(password==null || password=="")
- { 
- alert("Inserire una password!"); 
- return false; 
- } 
-}
-</script> 
+
 </head>
 <body>
+
 <div style="text-align:center"><h1>Accedi </h1> </div>
 <br>
 <form name="form" action="home" method="post" onsubmit="return validate()">

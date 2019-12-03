@@ -7,6 +7,14 @@
      <title>Home Page</title>
   </head>
   <body>
+  
+  <%
+  response.setHeader("Cache-Control", "no-cache");
+  response.setHeader("Cache-Control", "no-store");
+  response.setHeader("Pragma", "no-cache");
+  response.setDateHeader("Expire", 0);
+  
+  %>
  
      <jsp:include page="header.jsp"></jsp:include>
      <jsp:include page="menu.jsp"></jsp:include>

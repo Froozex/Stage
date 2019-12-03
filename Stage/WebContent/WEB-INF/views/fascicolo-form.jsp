@@ -171,15 +171,15 @@ function validate()
                 <tr>
                 <th>Richiesta Spese: </th>
                 <td>
-                 <input type="text" name="richiesta" size="45"
+                 <input type="text" name="costo" size="45"
                    value="<c:out value='${fasc.costo}' />"
                  />
                 </td>
                 <tr>
                 <th>Pagamento avvenuto: </th>
                 <td>
-                 <input type="text" name="costo" size="2"
-                   value="<c:out value='${fasc.pagamento}' />"
+                 <input type="radio" name="pagamento" value=""<c:out value='${fasc.pagamento}' /> />SI
+                 <input type="radio" name="pagamento" value=""<c:out value='${fasc.pagamento}' /> />NO
                  />
                 </td>
             <tr>
