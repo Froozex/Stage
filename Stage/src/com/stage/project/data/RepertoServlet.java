@@ -87,7 +87,9 @@ public class RepertoServlet extends HttpServlet {
 
   private void listReperto(HttpServletRequest request, HttpServletResponse response)
   throws SQLException, IOException, ServletException {
-      List < RepertoInfo > listRep = repertoDao.ListAllReperti();
+      
+	  String path = request.getParameter("nomina");
+	  List < RepertoInfo > listRep = repertoDao.ListAllReperti(path);
       request.setAttribute("listRep", listRep);
       RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/reperto-list.jsp");
       dispatcher.forward(request, response);

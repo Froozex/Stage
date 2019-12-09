@@ -147,17 +147,18 @@ public class RepertoDao {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public List < RepertoInfo > ListAllReperti() throws SQLException {
+    public List < RepertoInfo > ListAllReperti(String nominarep) throws SQLException {
 
     	List<RepertoInfo> listRep = new ArrayList<>();
-        
-        String sql = "SELECT reperto.nomina, numero_reperto, sequestrato, tipo_supporto, seriale, note, operazioni FROM reperto inner join fascicolo on fascicolo.nomina = ?";
+    	
+        String sql = "SELECT * FROM utenti.reperto where nomina = ?";
         		
          
         connect();
          
-        Statement statement = jdbcConnection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setString(1, nominarep);
+        ResultSet resultSet = statement.executeQuery();
         
         while(resultSet.next()) {
         	

@@ -18,10 +18,10 @@ protected String operazioni;
 public RepertoInfo() {
 }
 
-public RepertoInfo(String nomina, String nreperto, String sequestrato, String supporto, String seriale, String note,
+public RepertoInfo(String nominarep, String nreperto, String sequestrato, String supporto, String seriale, String note,
 		 		String operazioni) {
 super();
-this.nomina = nomina;
+this.nomina = nominarep;
 this.nreperto = nreperto;
 this.sequestrato = sequestrato;
 this.supporto = supporto;
@@ -41,8 +41,8 @@ this.note = note;
 this.operazioni = operazioni;
 }
 
-public RepertoInfo(String nomina) {
-	 this.nomina = nomina;
+public RepertoInfo(String nominarep) {
+	 this.nomina = nominarep;
 }
 
 public int getId() {

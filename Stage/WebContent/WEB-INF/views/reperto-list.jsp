@@ -10,6 +10,7 @@
 <body>
  <center>
   <h1>Reperti</h1>
+  <h3>Reperto della Nomina<b> <%=request.getAttribute("nomina") %>!</b></h3>
         <h2>
         <a href="fascicoli">Lista Fascicoli</a>
         &nbsp;&nbsp;&nbsp;
@@ -35,9 +36,9 @@
             <c:forEach var="rep" items="${listRep}">
                 <tr>
                     <td>
-                     <a href="editrepertoicolo?nomina=<c:out value='${rep.nreperto}'/> ">Modifica</a>
+                     <a href="editrepertoicolo?nreperto=<c:out value='${rep.nreperto}'/> ">Modifica</a>
                      &nbsp;&nbsp;&nbsp;&nbsp;
-                     <a href="deletereperto?nomina=<c:out value='${rep.nreperto}'/>">Elimina</a>                     
+                     <a href="deletereperto?nreperto=<c:out value='${rep.nreperto}'/>">Elimina</a>                     
                     </td>
                     <td><c:out value="${rep.nomina}" /></td>
                     <td><c:out value="${rep.nreperto}" /></td>
