@@ -64,9 +64,16 @@ function validate()
             <tr>
                 <th>Nomina: </th>
                 <td>
+                <c:if test="${fasc != null}">
+                 <input type="text" name="nomina" size="10"
+                   value="<c:out value='${fasc.nomina}' />"disabled
+                  />
+                  </c:if>
+                  <c:if test="${fasc == null}">
                  <input type="text" name="nomina" size="10"
                    value="<c:out value='${fasc.nomina}' />"
                   />
+                  </c:if>   
                 </td>
             </tr>
             <tr>

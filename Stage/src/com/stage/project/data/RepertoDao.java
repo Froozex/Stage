@@ -113,7 +113,7 @@ public class RepertoDao {
      */
     public RepertoInfo getReperto(String nomina_id) throws SQLException {
         RepertoInfo rep = null;
-        String sql = "SELECT * FROM reperto WHERE Nomina = ?";
+        String sql = "SELECT * FROM reperto WHERE nomina = ?";
          
         connect();
          
@@ -151,7 +151,7 @@ public class RepertoDao {
 
     	List<RepertoInfo> listRep = new ArrayList<>();
         
-        String sql = "SELECT reperto.nomina, numero_reperto, sequestrato, tipo_supporto, seriale, note, operazioni FROM reperto inner join fascicolo on reperto.nomina = fascicolo.nomina";
+        String sql = "SELECT reperto.nomina, numero_reperto, sequestrato, tipo_supporto, seriale, note, operazioni FROM reperto inner join fascicolo on fascicolo.nomina = ?";
         		
          
         connect();
@@ -162,7 +162,7 @@ public class RepertoDao {
         while(resultSet.next()) {
         	
         	String nomina = resultSet.getString("nomina");
-        	String nreperto = resultSet.getString("numero_Reperto");
+        	String nreperto = resultSet.getString("numero_reperto");
         	String sequestrato = resultSet.getString("sequestrato");
         	String supporto = resultSet.getString("tipo_supporto");
         	String seriale = resultSet.getString("seriale");

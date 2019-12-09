@@ -13,7 +13,6 @@
   <script>
   function sum(){
 	  dateFormat(d_inizio)=dateFormat(scadenza).add(giorni);}
-
   </script>
         <h2>
         <a href="home">Home Page</a>
@@ -72,7 +71,7 @@
                     <td><c:out value="${fasc.relazione}" /></td>
                     <td><c:out value="${fasc.costo}" /></td>
                     <td><c:out value="${fasc.pagamento}" /></td>
-                    <td><a href="reperti?nomina=<c:out value='${existingFasc.nomina}' />">Visualizza reperti</a></td>
+                    <td><a href="reperti?nomina=<c:out value='${fasc.nomina}' />">Visualizza reperti</a></td>
                 </tr>
             </c:forEach>
         </table>

@@ -24,6 +24,7 @@
             <caption><h2>Lista Reperti</h2></caption>
             <tr>
                 <th></th>
+                <th>Nomina</th>
                 <th>Numero Reperto</th>
                 <th>Sequestrato a:</th>
                 <th>Tipo di Supporto</th>
@@ -34,10 +35,11 @@
             <c:forEach var="rep" items="${listRep}">
                 <tr>
                     <td>
-                     <a href="editrepertoicolo?nomina=<c:out value='${existingRep.nreperto}'/> ">Modifica</a>
+                     <a href="editrepertoicolo?nomina=<c:out value='${rep.nreperto}'/> ">Modifica</a>
                      &nbsp;&nbsp;&nbsp;&nbsp;
-                     <a href="deletereperto?nomina=<c:out value='${existingRep.nreperto}'/>">Elimina</a>                     
+                     <a href="deletereperto?nomina=<c:out value='${rep.nreperto}'/>">Elimina</a>                     
                     </td>
+                    <td><c:out value="${rep.nomina}" /></td>
                     <td><c:out value="${rep.nreperto}" /></td>
                     <td><c:out value="${rep.sequestrato}" /></td>
                     <td><c:out value="${rep.supporto}" /></td>

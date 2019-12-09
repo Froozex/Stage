@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet({"/reperti", "/newreperto", "/insertreperto", "/deletereperto", "/editreperto", "/updatereperto"})
+@WebServlet({"/reperti","/newreperto", "/insertreperto", "/deletereperto", "/editreperto", "/updatereperto"})
 public class RepertoServlet extends HttpServlet {
  
 	private static final long serialVersionUID = 1L;
@@ -55,7 +55,7 @@ public class RepertoServlet extends HttpServlet {
           else if(action.equals("/deletereperto")) {
           	deleteReperto(request, response);}
           else if(action.equals("/editreperto")) {
-          	editReperto(request, response);}
+            	editReperto(request, response);}
           else if(action.equals("/updatereperto")) {
           	updateReperto(request, response);}
           else {listReperto(request, response);}
