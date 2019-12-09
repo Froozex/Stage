@@ -47,7 +47,7 @@ public class RepertoDao {
     
     public boolean insertReperto(RepertoInfo rep) throws SQLException {
     	
-    	String sql = "INSERT INTO reperto (numero_reperto, sequestrato, tipo_supporto, seriale, note, operazioni) VALUES(?, ?, ?, ?, ?, ?)";
+    	String sql = "INSERT INTO reperto (nomina, numero_reperto, sequestrato, tipo_supporto, seriale, note, operazioni) VALUES(?, ?, ?, ?, ?, ?)";
     	connect();
     	
     	PreparedStatement statement = jdbcConnection.prepareStatement(sql);

@@ -19,7 +19,7 @@
         &nbsp;&nbsp;&nbsp;
          <a href="newfascicolo">Aggiungi nuovo fascicolo</a>
          &nbsp;&nbsp;&nbsp;
-         <a href="fascicoli">Tutti i fascicoli</a>
+         
          
         </h2>
  </center>

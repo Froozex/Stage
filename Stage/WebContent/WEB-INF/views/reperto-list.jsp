@@ -12,11 +12,11 @@
   <h1>Reperti</h1>
   <h3>Reperto della Nomina<b> <%=request.getAttribute("nomina") %>!</b></h3>
         <h2>
-        <a href="fascicoli">Lista Fascicoli</a>
+        <a href="fascicoli">Torna ai Fascicoli</a>
         &nbsp;&nbsp;&nbsp;
          <a href="newreperto">Aggiungi Nuovo Reperto</a>
          &nbsp;&nbsp;&nbsp;
-         <a href="reperti">Tutti i Reperti</a>
+         
          
         </h2>
  </center>

@@ -11,9 +11,10 @@
  <center>
   <h1>Reperti</h1>
         <h2>
-         <a href="newreperto">Aggiungi Un Nuovo Reperto</a>
+         <a href="fascicoli">Torna ai Fascicoli</a>
          &nbsp;&nbsp;&nbsp;
-         <a href="reperti">Lista Reperti</a>
+         <form> <input type="button" value="Go Back" onClick="history.go(-1)"> </form>
+         
          
         </h2>
  </center>
@@ -40,7 +41,7 @@
           </c:if>            
             
             <tr>
-                <th>Numero Reperto: </th>
+                <th>Nomina : </th>
                 <td>
                  <input type="text" name="nreperto" size="10"
                    value="<c:out value='${rep.nreperto}' />"
@@ -48,37 +49,45 @@
                 </td>
             </tr>
             <tr>
-                <th>Sequestrato a: </th>
+                <th>Numero Reperto : </th>
                 <td>
-                 <input type="text" name="sequestrato" size="10"
+                 <input type="text" name="nreperto" size="10"
+                   value="<c:out value='${rep.nreperto}' />"
+                 />
+                </td>
+            </tr>
+            <tr>
+                <th>Sequestrato a : </th>
+                <td>
+                 <input type="text" name="sequestrato" size="45"
                    value="<c:out value='${rep.sequestrato}' />"
                  />
                 </td>
                 <tr>
-                <th>Tipo di Supporto: </th>
+                <th>Tipo di Supporto : </th>
                 <td>
                  <input type="text" name="supporto" size="45"
                    value="<c:out value='${rep.supporto}' />"
                  />
                 </td>
                 <tr>
-                <th>Seriale: </th>
+                <th>Seriale : </th>
                 <td>
                  <input type="text" name="seriale" size="100"
                    value="<c:out value='${rep.seriale}' />"
                  />
                 </td>
                 <tr>
-                <th>Note: </th>
+                <th>Note : </th>
                 <td>
                  <input type="text" name="note" size="100"
                    value="<c:out value='${rep.note}' />"
                  />
                 </td>
                 <tr>
-                <th>Operazioni: </th>
+                <th>Operazioni : </th>
                 <td>
-                 <input type="text" name="consulente" size="45"
+                 <input type="text" name="operazioni" size="45"
                    value="<c:out value='${rep.operazioni}' />"
                  />
                 </td>

@@ -34,9 +34,7 @@ function validate()
         <h2>
         <a href="home">Home Page</a>
         &nbsp;&nbsp;&nbsp;
-         <a href="newfascicolo">Aggiungi Un Nuovo Fascicolo</a>
-         &nbsp;&nbsp;&nbsp;
-         <a href="fascicoli">Lista Fascicoli</a>
+         <a href="fascicoli">Torna ai Fascicoli</a>
          
         </h2>
  </center>
@@ -187,7 +185,7 @@ function validate()
                 <td>
                  <input type="radio" name="pagamento" value=""<c:out value='${fasc.pagamento}' /> />SI
                  <input type="radio" name="pagamento" value=""<c:out value='${fasc.pagamento}' /> />NO
-                 />
+                 
                 </td>
             <tr>
              <td colspan="2" align="center">
