@@ -9,6 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import com.mysql.cj.protocol.Resultset;
 
@@ -19,6 +24,8 @@ public class FascicoloDao {
 	private String jdbcUsername;
 	private String jdbcPassword;
 	private Connection jdbcConnection;
+	InputStream input = null;
+	FileOutputStream output = null;
 	
 	public FascicoloDao(String jdbcURL, String jdbcUsername, String jdbcPassword)	{
 		
@@ -45,7 +52,7 @@ public class FascicoloDao {
         }
     }
     
-    public boolean insertFascicolo(FascicoloInfo fasc) throws SQLException {
+    public boolean insertFascicolo(FascicoloInfo fasc, InputStream relazione) throws SQLException {
     	
     	String sql = "INSERT INTO fascicolo (nomina, procura, pubblico_ministero, polizia_giudiziaria, indagato, reato, consulente, ausiliario, data_affidamento_incarico, data_inizio_operazioni, giorni_concessi, scadenza, proroga, richiesta_gestori, relazione, richiesta_spese, pagamento_avvenuto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     	connect();
@@ -65,7 +72,11 @@ public class FascicoloDao {
         statement.setString(12, fasc.getScadenza());
         statement.setInt(13, fasc.getProroga());
         statement.setString(14, fasc.getRichiesta());
-        statement.setString(15, fasc.getRelazione());
+        
+        if(relazione != null) {
+        	statement.setBlob(15, relazione);
+        }
+        
         statement.setString(16, fasc.getCosto());
         statement.setString(17, fasc.getPagamento());
         
@@ -79,7 +90,7 @@ public class FascicoloDao {
      * Update fascicolo
      * @param fasc
      */
-    public boolean updateFascicolo(FascicoloInfo fasc) throws SQLException {
+    public boolean updateFascicolo(FascicoloInfo fasc, InputStream relazione) throws SQLException {
         String sql = "UPDATE fascicolo SET nomina = ?, procura = ?, pubblico_ministero = ?, polizia_giudiziaria = ?, indagato = ?, reato = ?, consulente = ?, ausiliario = ?, data_affidamento_incarico = ?, data_inizio_operazioni = ?, giorni_concessi = ?, scadenza = ?, proroga = ?, richiesta_gestori = ?, relazione = ?, richiesta_spese = ?, pagamento_avvenuto = ?";
         connect();
          
@@ -98,7 +109,11 @@ public class FascicoloDao {
         statement.setString(12, fasc.getScadenza());
         statement.setInt(13, fasc.getProroga());
         statement.setString(14, fasc.getRichiesta());
-        statement.setString(15, fasc.getRelazione());
+        
+        if(relazione != null) {
+        	statement.setBlob(15, relazione);
+        }
+        
         statement.setString(16, fasc.getCosto());
         statement.setString(17, fasc.getPagamento());
          
@@ -112,7 +127,7 @@ public class FascicoloDao {
      * Delete fascicolo
      * @param nomina
      */
-        public boolean deleteFascicolo(FascicoloInfo fasc) throws SQLException {
+        public boolean deleteFascicolo(FascicoloInfo fasc, InputStream relazione) throws SQLException {
             String sql = "DELETE FROM fascicolo where nomina = ?";
              
             connect();
@@ -131,7 +146,7 @@ public class FascicoloDao {
      * @param nomina
      * @return
      */
-    public FascicoloInfo getFascicolo(String nomina_id) throws SQLException {
+    public FascicoloInfo getFascicolo(String nomina_id) throws SQLException, IOException {
         FascicoloInfo fasc = null;
         String sql = "SELECT * FROM fascicolo WHERE nomina = ?";
          
@@ -141,6 +156,9 @@ public class FascicoloDao {
         statement.setString(1, nomina_id);
          
         ResultSet resultSet = statement.executeQuery();
+        
+        File theFile = new File("resume_from_db.pdf");
+		output = new FileOutputStream(theFile);
          
         if (resultSet.next()) {
         	String nomina = resultSet.getString("nomina");
@@ -157,11 +175,16 @@ public class FascicoloDao {
         	String scadenza = resultSet.getString("scadenza");
         	int proroga = resultSet.getInt("proroga");
         	String richiesta = resultSet.getString("richiesta_gestori");
-        	String relazione = resultSet.getString("relazione");
+        	input = resultSet.getBinaryStream("relazione"); 
+
+        	byte[] buffer = new byte[1024];
+			while (input.read(buffer) > 0) {
+				output.write(buffer);
+			}
         	String costo = resultSet.getString("richiesta_spese");
         	String pagamento = resultSet.getString("pagamento_avvenuto");
         	
-        	fasc = new FascicoloInfo(nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, relazione, costo, pagamento);
+        	fasc = new FascicoloInfo(nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, costo, pagamento);
         	
         }
          
@@ -176,7 +199,7 @@ public class FascicoloDao {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public List < FascicoloInfo > ListAllFascicoli() throws SQLException {
+    public List < FascicoloInfo > ListAllFascicoli() throws SQLException, IOException {
 
     	List<FascicoloInfo> listFasc = new ArrayList<>();
         
@@ -186,6 +209,9 @@ public class FascicoloDao {
          
         Statement statement = jdbcConnection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
+        
+        File theFile = new File("resume_from_db.pdf");
+		output = new FileOutputStream(theFile);
         
         while(resultSet.next()) {
         	
@@ -204,11 +230,16 @@ public class FascicoloDao {
         	String scadenza = resultSet.getString("scadenza");
         	int proroga = resultSet.getInt("proroga");
         	String richiesta = resultSet.getString("richiesta_gestori");
-        	String relazione = resultSet.getString("relazione");
+        	input = resultSet.getBinaryStream("relazione"); 
+
+        	byte[] buffer = new byte[1024];
+			while (input.read(buffer) > 0) {
+				output.write(buffer);
+			}
         	String costo = resultSet.getString("richiesta_spese");
         	String pagamento = resultSet.getString("pagamento_avvenuto");
         	
-        	FascicoloInfo fasc = new FascicoloInfo(id, nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, relazione, costo, pagamento);
+        	FascicoloInfo fasc = new FascicoloInfo(id, nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, costo, pagamento);
         	listFasc.add(fasc);
         }
         
@@ -220,5 +251,21 @@ public class FascicoloDao {
         return listFasc;
     	
     	
+    }
+    
+    private void printSQLException(SQLException ex) {
+        for (Throwable e: ex) {
+            if (e instanceof SQLException) {
+                e.printStackTrace(System.err);
+                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+        }
     }
 }

@@ -68,7 +68,7 @@
                     <td><c:out value="${fasc.scadenza}" /></td>
                     <td><c:out value="${fasc.proroga}" /></td>
                     <td><c:out value="${fasc.richiesta}" /></td>
-                    <td><c:out value="${fasc.relazione}" /></td>
+                    <td><a href="relazione.jsp">relazione_<c:out value='${fasc.nomina}'/>.docx</a> <c:out value="${relazione}" /></td>
                     <td><c:out value="${fasc.costo}" /></td>
                     <td><c:out value="${fasc.pagamento}" /></td>
                     <td><a href="reperti?nomina=<c:out value='${fasc.nomina}' />">Visualizza reperti</a></td>

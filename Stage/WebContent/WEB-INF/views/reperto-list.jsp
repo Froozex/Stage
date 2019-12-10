@@ -36,7 +36,7 @@
             <c:forEach var="rep" items="${listRep}">
                 <tr>
                     <td>
-                     <a href="editrepertoicolo?nreperto=<c:out value='${rep.nreperto}'/> ">Modifica</a>
+                     <a href="editreperto?nreperto=<c:out value='${rep.nreperto}'/> ">Modifica</a>
                      &nbsp;&nbsp;&nbsp;&nbsp;
                      <a href="deletereperto?nreperto=<c:out value='${rep.nreperto}'/>">Elimina</a>                     
                     </td>

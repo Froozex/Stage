@@ -13,7 +13,7 @@
         <h2>
          <a href="fascicoli">Torna ai Fascicoli</a>
          &nbsp;&nbsp;&nbsp;
-         <form> <input type="button" value="Go Back" onClick="history.go(-1)"> </form>
+         
          
          
         </h2>
@@ -43,8 +43,8 @@
             <tr>
                 <th>Nomina : </th>
                 <td>
-                 <input type="text" name="nreperto" size="10"
-                   value="<c:out value='${rep.nreperto}' />"
+                 <input type="text" name="nomina" size="10"
+                   value="<c:out value='${rep.nomina}' />"
                  />
                 </td>
             </tr>

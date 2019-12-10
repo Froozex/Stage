@@ -7,25 +7,7 @@
 <html>
 <head>
  <title>Fascicolo Manager</title>
- 
- <script> 
-function validate()
-{ 
- var nomina = document.form.nomina.value; 
- var procura = document.form.procura.value;
- 
- if (nomina==null || nomina=="")
- { 
- alert("Inserire la nomina!"); 
- return false; 
- }
- else if(procura==null || procura=="")
- { 
- alert("Inserire la procura!"); 
- return false; 
- } 
-}
-</script> 
+
  
 </head>
 <body>
@@ -40,10 +22,10 @@ function validate()
  </center>
     <div align="center">
   <c:if test="${fasc != null}">
-   <form action="updatefascicolo" method="post" onsubmit="return validate()">
+   <form action="updatefascicolo" method="post" onsubmit="return validate()" enctype="multipart/form-data">
         </c:if>
         <c:if test="${fasc == null}">
-   <form action="insertfascicolo" method="post" onsubmit="return validate()">
+   <form action="insertfascicolo" method="post" onsubmit="return validate()" enctype="multipart/form-data">
         </c:if>
         <table border="1" cellpadding="5">
             <caption>
@@ -172,6 +154,16 @@ function validate()
                  <input type="file" name="relazione"
                    value="<c:out value='${fasc.relazione}' />"
                  />
+                 <c:choose>
+                 <c:when test= "<c:out value='${relazione}' />== null">
+                 <input type="file" name="relazione" id= "Inserisci il file della relazione">
+                 <input type="button" name="doc" id= "...Oppure creane uno nuovo.">
+                  </c:when>  
+                   <c:otherwise>  
+                   <a href="relazione_<c:out value='${fasc.nomina}'/>.docx">relazione_<c:out value='${fasc.nomina}'/>.docx</a> <c:out value="${relazione}" />
+                   <input type="file" name="relazione" value= "Inserisci un altro file della relazione" >
+                  </c:otherwise>
+				</c:choose>
                 </td>
                 <tr>
                 <th>Richiesta Spese: </th>

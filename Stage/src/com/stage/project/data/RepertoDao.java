@@ -47,7 +47,7 @@ public class RepertoDao {
     
     public boolean insertReperto(RepertoInfo rep) throws SQLException {
     	
-    	String sql = "INSERT INTO reperto (nomina, numero_reperto, sequestrato, tipo_supporto, seriale, note, operazioni) VALUES(?, ?, ?, ?, ?, ?)";
+    	String sql = "INSERT INTO reperto (nomina, numero_reperto, sequestrato, tipo_supporto, seriale, note, operazioni) VALUES(?, ?, ?, ?, ?, ?, ?)";
     	connect();
     	
     	PreparedStatement statement = jdbcConnection.prepareStatement(sql);
@@ -76,12 +76,12 @@ public class RepertoDao {
          
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
         //statement.setString(1, rep.getNomina());
-        statement.setString(2, rep.getNreperto());
-        statement.setString(3, rep.getSequestrato());
-        statement.setString(4, rep.getSupporto());
-        statement.setString(5, rep.getSeriale());
-        statement.setString(6, rep.getNote());
-        statement.setString(7, rep.getOperazioni());
+        statement.setString(1, rep.getNreperto());
+        statement.setString(2, rep.getSequestrato());
+        statement.setString(3, rep.getSupporto());
+        statement.setString(4, rep.getSeriale());
+        statement.setString(5, rep.getNote());
+        statement.setString(6, rep.getOperazioni());
          
         boolean rowUpdated = statement.executeUpdate() > 0;
         statement.close();
@@ -111,14 +111,14 @@ public class RepertoDao {
      * @param id
      * @return
      */
-    public RepertoInfo getReperto(String nomina_id) throws SQLException {
+    public RepertoInfo getReperto(String numrep) throws SQLException {
         RepertoInfo rep = null;
-        String sql = "SELECT * FROM reperto WHERE nomina = ?";
+        String sql = "SELECT * FROM reperto WHERE numero_reperto = ?";
          
         connect();
          
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setString(1, nomina_id);
+        statement.setString(1, numrep);
          
         ResultSet resultSet = statement.executeQuery();
          

@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.io.InputStream;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,16 +14,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 
 
 
 @WebServlet({"/fascicoli", "/newfascicolo", "/insertfascicolo", "/deletefascicolo", "/editfascicolo", "/updatefascicolo"})
+@MultipartConfig(maxFileSize = 16177215)
 public class FascicoloServlet extends HttpServlet {
    
 	private static final long serialVersionUID = 1L;
 	
 	private FascicoloDao fascicoloDao;
-	
+	InputStream inputStream = null;
 
     public void init() {
         
@@ -111,7 +115,9 @@ public class FascicoloServlet extends HttpServlet {
     }
 
     private void insertFascicolo(HttpServletRequest request, HttpServletResponse response)
-    throws SQLException, IOException {
+    throws SQLException, IOException, IllegalStateException, ServletException {
+    	
+    	
     	
     	int id = 0;
     	if(request.getParameter("id")=="" || request.getParameter("id")==null) {
@@ -133,17 +139,26 @@ public class FascicoloServlet extends HttpServlet {
          String scadenza = request.getParameter("scadenza");
          int proroga = Integer.parseInt(request.getParameter("proroga"));
          String richiesta = request.getParameter("richiesta");
-         String relazione = request.getParameter("relazione");
+         Part filePart = request.getPart("relazione");
+         if (filePart != null) {
+             // prints out some information for debugging
+             System.out.println(filePart.getName());
+             System.out.println(filePart.getSize());
+             System.out.println(filePart.getContentType());
+
+             // obtains input stream of the upload file
+             inputStream = filePart.getInputStream();}
          String costo = request.getParameter("costo");
          String pagamento = request.getParameter("pagamento");
 
-         FascicoloInfo newfasc = new FascicoloInfo(id, nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, relazione, costo, pagamento);
-         fascicoloDao.insertFascicolo(newfasc);
+         FascicoloInfo newfasc = new FascicoloInfo(id, nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, costo, pagamento);
+         fascicoloDao.insertFascicolo(newfasc, inputStream);
      	 response.sendRedirect("fascicoli");
     }
 
     private void updateFascicolo(HttpServletRequest request, HttpServletResponse response)
-    throws SQLException, IOException {
+    throws SQLException, IOException, IllegalStateException, ServletException {
+    	
     	
     	
         String nomina = request.getParameter("nomina");
@@ -160,22 +175,30 @@ public class FascicoloServlet extends HttpServlet {
         String scadenza = request.getParameter("scadenza");
         int proroga = Integer.parseInt(request.getParameter("proroga"));
         String richiesta = request.getParameter("richiesta");
-        String relazione = request.getParameter("relazione");
+        Part filePart = request.getPart("relazione");
+        if (filePart != null) {
+            // prints out some information for debugging
+            System.out.println(filePart.getName());
+            System.out.println(filePart.getSize());
+            System.out.println(filePart.getContentType());
+
+            // obtains input stream of the upload file
+            inputStream = filePart.getInputStream();}
         String costo = request.getParameter("costo");
         String pagamento = request.getParameter("pagamento");
 
         FascicoloInfo fasc = new FascicoloInfo(nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico,
-					d_inizio, giorni, scadenza, proroga, richiesta, relazione, costo, pagamento);
-        fascicoloDao.updateFascicolo(fasc);
+					d_inizio, giorni, scadenza, proroga, richiesta, costo, pagamento);
+        fascicoloDao.updateFascicolo(fasc, inputStream);
         response.sendRedirect("fascicoli");
     }
 
     private void deleteFascicolo(HttpServletRequest request, HttpServletResponse response)
-    throws SQLException, IOException {
+    throws SQLException, IOException, IllegalStateException, ServletException {
         String nomina = request.getParameter("nomina");
         
         FascicoloInfo  fasc = new FascicoloInfo(nomina);
-        fascicoloDao.deleteFascicolo(fasc);
+        fascicoloDao.deleteFascicolo(fasc, inputStream);
         response.sendRedirect("fascicoli");
     }
     

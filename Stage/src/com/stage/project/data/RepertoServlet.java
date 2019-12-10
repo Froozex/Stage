@@ -103,8 +103,8 @@ public class RepertoServlet extends HttpServlet {
 
   private void editReperto(HttpServletRequest request, HttpServletResponse response)
   throws SQLException, ServletException, IOException {
-      String nomina_id = request.getParameter("nomina");
-      RepertoInfo existingRep = repertoDao.getReperto(nomina_id);
+      String numrep = request.getParameter("numero_reperto");
+      RepertoInfo existingRep = repertoDao.getReperto(numrep);
       RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/reperto-form.jsp");
       request.setAttribute("rep", existingRep);
       dispatcher.forward(request, response);
@@ -114,7 +114,7 @@ public class RepertoServlet extends HttpServlet {
   private void insertReperto(HttpServletRequest request, HttpServletResponse response)
   throws SQLException, IOException {
   	 
-  	   //String nomina = request.getParameter("nomina");
+  	   String nomina = request.getParameter("nomina");
        String nreperto = request.getParameter("nreperto");
        String sequestrato = request.getParameter("sequestrato");
        String supporto = request.getParameter("supporto");
@@ -122,10 +122,10 @@ public class RepertoServlet extends HttpServlet {
        String note = request.getParameter("note");
        String operazioni = request.getParameter("operazioni");
 
-       RepertoInfo newrep = new RepertoInfo(nreperto, sequestrato, supporto, seriale, note, operazioni);
+       RepertoInfo newrep = new RepertoInfo(nomina, nreperto, sequestrato, supporto, seriale, note, operazioni);
        repertoDao.insertReperto(newrep);
        
-   	 response.sendRedirect("reperti");
+   	 response.sendRedirect("reperti?nomina="+nomina);
   }
 
   private void updateReperto(HttpServletRequest request, HttpServletResponse response)
@@ -147,11 +147,11 @@ public class RepertoServlet extends HttpServlet {
 
   private void deleteReperto(HttpServletRequest request, HttpServletResponse response)
   throws SQLException, IOException {
-      String nomina_id = request.getParameter("nomina");
+      String nomina = request.getParameter("nomina");
       
-      RepertoInfo  rep = new RepertoInfo(nomina_id);
+      RepertoInfo  rep = new RepertoInfo(nomina);
       repertoDao.deleteReperto(rep);
       System.out.println("Reperto rimosso?");
-      response.sendRedirect("reperti");
+      response.sendRedirect("reperti?nomina="+nomina);
   }
 }

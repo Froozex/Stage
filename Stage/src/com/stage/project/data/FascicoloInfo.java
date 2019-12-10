@@ -2,6 +2,7 @@ package com.stage.project.data;
 
 import java.io.File;
 import java.sql.Date;
+import java.io.InputStream;
 
 public class FascicoloInfo {
  
@@ -21,7 +22,8 @@ public class FascicoloInfo {
  protected String scadenza;
  protected int proroga;
  protected String richiesta;
- protected String relazione;
+ //protected String relazione;
+ InputStream relazione;
  protected String costo;
  protected String pagamento;
  
@@ -30,7 +32,7 @@ public class FascicoloInfo {
  
  public FascicoloInfo(String nomina, String procura, String pm, String pg, String indagato, String reato,
 		 		String consulente, String ausiliario, String d_incarico, String d_inizio, int giorni, String scadenza,
-		 		int proroga, String richiesta, String relazione, String costo, String pagamento) {
+		 		int proroga, String richiesta, String costo, String pagamento) {
   super();
   this.nomina = nomina;
   this.procura = procura;
@@ -46,14 +48,14 @@ public class FascicoloInfo {
   this.scadenza = scadenza;
   this.proroga = proroga;
   this.richiesta = richiesta;
-  this.relazione = relazione;
+  //this.relazione = relazione;
   this.costo = costo;
   this.pagamento = pagamento;
  }
 
  public FascicoloInfo(int id, String nomina, String procura, String pm, String pg, String indagato, String reato,
 	 		String consulente, String ausiliario, String d_incarico, String d_inizio, int giorni, String scadenza,
-	 		int proroga, String richiesta, String relazione, String costo, String pagamento) {
+	 		int proroga, String richiesta, String costo, String pagamento) {
   super();
   this.id = id;
   this.nomina = nomina;
@@ -70,7 +72,7 @@ public class FascicoloInfo {
   this.scadenza = scadenza;
   this.proroga = proroga;
   this.richiesta = richiesta;
-  this.relazione = relazione;
+  //this.relazione = relazione;
   this.costo = costo;
   this.pagamento = pagamento;
  }
@@ -195,11 +197,11 @@ public void setRichiesta(String richiesta) {
 	this.richiesta = richiesta;
 }
 
-public String getRelazione() {
+public InputStream getRelazione() {
 	return relazione;
 }
 
-public void setRelazione(String relazione) {
+public void setRelazione(InputStream relazione) {
 	this.relazione = relazione;
 }
 
