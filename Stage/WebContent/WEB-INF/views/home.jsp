@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,23 +12,15 @@
   </head>
   <body>
   
-  <%
-  response.setHeader("Cache-Control", "no-cache");
-  response.setHeader("Cache-Control", "no-store");
-  response.setHeader("Pragma", "no-cache");
-  response.setDateHeader("Expire", 0);
   
-  %>
  
      <jsp:include page="header.jsp"></jsp:include>
-     <jsp:include page="menu.jsp"></jsp:include>
     
       <h3>Benvenuto<b> <%=request.getAttribute("userName") %>!</b></h3>
       
       Gestisci qui i tuoi fascicoli forensi! <br><br>
 
 
-<!-- Do not use table to format fields. As a good practice use CSS -->
 <table align="center">
  <tr>
  <td></td>
@@ -40,8 +36,7 @@
  
      
    </table>
-  
-  <jsp:include page="footer.jsp"></jsp:include>
+
   </body>
 
   
