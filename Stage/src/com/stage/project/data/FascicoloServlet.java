@@ -161,7 +161,7 @@ public class FascicoloServlet extends HttpServlet {
     	
     	
     	
-        String nomina = request.getParameter("nomina");
+        
         String procura = request.getParameter("procura");
         String pm = request.getParameter("pm");
         String pg = request.getParameter("pg");
@@ -187,7 +187,7 @@ public class FascicoloServlet extends HttpServlet {
         String costo = request.getParameter("costo");
         String pagamento = request.getParameter("pagamento");
 
-        FascicoloInfo fasc = new FascicoloInfo(nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico,
+        FascicoloInfo fasc = new FascicoloInfo(procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico,
 					d_inizio, giorni, scadenza, proroga, richiesta, costo, pagamento);
         fascicoloDao.updateFascicolo(fasc, inputStream);
         response.sendRedirect("fascicoli");

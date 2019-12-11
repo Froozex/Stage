@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -11,9 +12,9 @@
  <center>
   <h1>Reperti</h1>
         <h2>
-         <a href="fascicoli">Torna ai Fascicoli</a>
+         <a href="home">Home Page</a>
          &nbsp;&nbsp;&nbsp;
-         
+         <a href="fascicoli">Torna ai Fascicoli</a>
          
          
         </h2>
@@ -43,9 +44,16 @@
             <tr>
                 <th>Nomina : </th>
                 <td>
+                <c:if test="${rep != null}">
+                 <input type="text" name="nomina" size="10"
+                   value="<c:out value='${rep.nomina}' />"disabled
+                 />
+                 </c:if>
+                 <c:if test="${rep == null}">
                  <input type="text" name="nomina" size="10"
                    value="<c:out value='${rep.nomina}' />"
                  />
+                 </c:if>
                 </td>
             </tr>
             <tr>

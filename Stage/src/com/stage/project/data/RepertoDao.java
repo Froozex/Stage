@@ -71,7 +71,7 @@ public class RepertoDao {
      * @param fasc
      */
     public boolean updateReperto(RepertoInfo rep) throws SQLException {
-        String sql = "UPDATE reperto SET numero_reperto = ?, sequestrato = ?, tipo_supporto = ?, seriale = ?, note = ?, operazioni = ?";
+        String sql = "UPDATE reperto SET numero_reperto = ?, sequestrato = ?, tipo_supporto = ?, seriale = ?, note = ?, operazioni = ? WHERE numero_reperto = ?";
         connect();
          
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
@@ -82,6 +82,7 @@ public class RepertoDao {
         statement.setString(4, rep.getSeriale());
         statement.setString(5, rep.getNote());
         statement.setString(6, rep.getOperazioni());
+        statement.setString(7, rep.getNreperto());
          
         boolean rowUpdated = statement.executeUpdate() > 0;
         statement.close();
@@ -90,16 +91,16 @@ public class RepertoDao {
     }
 
     /**
-     * Delete fascicolo
+     * Delete reperto
      * @param nomina
      */
-        public boolean deleteReperto(RepertoInfo fasc) throws SQLException {
-            String sql = "DELETE FROM reperto where Nomina = ?";
+        public boolean deleteReperto(RepertoInfo rep) throws SQLException {
+            String sql = "DELETE FROM reperto where nomina = ?";
             
             connect();
              
             PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-            statement.setString(1, fasc.getNomina()); 
+            statement.setString(1, rep.getNomina()); 
             boolean rowDeleted = statement.executeUpdate() > 0;
             statement.close();
             disconnect();
@@ -112,7 +113,8 @@ public class RepertoDao {
      * @return
      */
     public RepertoInfo getReperto(String numrep) throws SQLException {
-        RepertoInfo rep = null;
+        
+    	RepertoInfo rep = null;
         String sql = "SELECT * FROM reperto WHERE numero_reperto = ?";
          
         connect();

@@ -77,6 +77,28 @@ public class FascicoloInfo {
   this.pagamento = pagamento;
  }
  
+ public FascicoloInfo(String procura, String pm, String pg, String indagato, String reato,
+	 		String consulente, String ausiliario, String d_incarico, String d_inizio, int giorni, String scadenza,
+	 		int proroga, String richiesta, String costo, String pagamento) {
+super();
+this.procura = procura;
+this.pm = pm;
+this.pg = pg;
+this.indagato = indagato;
+this.reato = reato;
+this.consulente = consulente;
+this.ausiliario = ausiliario;
+this.d_incarico = d_incarico;
+this.d_inizio = d_inizio;
+this.giorni = giorni;
+this.scadenza = scadenza;
+this.proroga = proroga;
+this.richiesta = richiesta;
+//this.relazione = relazione;
+this.costo = costo;
+this.pagamento = pagamento;
+}
+ 
  public FascicoloInfo(String nomina) {
 	 this.nomina = nomina;
  }

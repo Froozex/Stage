@@ -71,7 +71,10 @@
                     <td><a href="relazione.jsp">relazione_<c:out value='${fasc.nomina}'/>.docx</a> <c:out value="${relazione}" /></td>
                     <td><c:out value="${fasc.costo}" /></td>
                     <td><c:out value="${fasc.pagamento}" /></td>
-                    <td><a href="reperti?nomina=<c:out value='${fasc.nomina}' />">Visualizza reperti</a></td>
+                    <td><a href="reperti?nomina=<c:out value='${fasc.nomina}' />">Visualizza reperti</a>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;
+                    	<a href="newreperto?nomina=<c:out value='${fasc.nomina}' />">Aggiungi nuovo reperto</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

@@ -91,31 +91,32 @@ public class FascicoloDao {
      * @param fasc
      */
     public boolean updateFascicolo(FascicoloInfo fasc, InputStream relazione) throws SQLException {
-        String sql = "UPDATE fascicolo SET nomina = ?, procura = ?, pubblico_ministero = ?, polizia_giudiziaria = ?, indagato = ?, reato = ?, consulente = ?, ausiliario = ?, data_affidamento_incarico = ?, data_inizio_operazioni = ?, giorni_concessi = ?, scadenza = ?, proroga = ?, richiesta_gestori = ?, relazione = ?, richiesta_spese = ?, pagamento_avvenuto = ?";
+        String sql = "UPDATE fascicolo SET procura = ?, pubblico_ministero = ?, polizia_giudiziaria = ?, indagato = ?, reato = ?, consulente = ?, ausiliario = ?, data_affidamento_incarico = ?, data_inizio_operazioni = ?, giorni_concessi = ?, scadenza = ?, proroga = ?, richiesta_gestori = ?, relazione = ?, richiesta_spese = ?, pagamento_avvenuto = ? WHERE nomina = ?";
         connect();
          
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setString(1, fasc.getNomina());
-        statement.setString(2, fasc.getProcura());
-        statement.setString(3, fasc.getPm());
-        statement.setString(4, fasc.getPg());
-        statement.setString(5, fasc.getIndagato());
-        statement.setString(6, fasc.getReato());
-        statement.setString(7, fasc.getConsulente());
-        statement.setString(8, fasc.getAusiliario());
-        statement.setString(9, fasc.getD_incarico());
-        statement.setString(10, fasc.getD_inizio());
-        statement.setInt(11, fasc.getGiorni());
-        statement.setString(12, fasc.getScadenza());
-        statement.setInt(13, fasc.getProroga());
-        statement.setString(14, fasc.getRichiesta());
+        statement.setString(17, fasc.getNomina());
+        statement.setString(1, fasc.getProcura());
+        statement.setString(2, fasc.getPm());
+        statement.setString(3, fasc.getPg());
+        statement.setString(4, fasc.getIndagato());
+        statement.setString(5, fasc.getReato());
+        statement.setString(6, fasc.getConsulente());
+        statement.setString(7, fasc.getAusiliario());
+        statement.setString(8, fasc.getD_incarico());
+        statement.setString(9, fasc.getD_inizio());
+        statement.setInt(10, fasc.getGiorni());
+        statement.setString(11, fasc.getScadenza());
+        statement.setInt(12, fasc.getProroga());
+        statement.setString(13, fasc.getRichiesta());
         
         if(relazione != null) {
-        	statement.setBlob(15, relazione);
+        	statement.setBlob(14, relazione);
         }
         
-        statement.setString(16, fasc.getCosto());
-        statement.setString(17, fasc.getPagamento());
+        statement.setString(15, fasc.getCosto());
+        statement.setString(16, fasc.getPagamento());
+        System.out.println("modifica");
          
         boolean rowUpdated = statement.executeUpdate() > 0;
         statement.close();
@@ -147,7 +148,8 @@ public class FascicoloDao {
      * @return
      */
     public FascicoloInfo getFascicolo(String nomina_id) throws SQLException, IOException {
-        FascicoloInfo fasc = null;
+        
+    	FascicoloInfo fasc = null;
         String sql = "SELECT * FROM fascicolo WHERE nomina = ?";
          
         connect();
