@@ -40,7 +40,8 @@ public class RegisterServlet extends HttpServlet {
  String email = request.getParameter("email");
  String userName = request.getParameter("username");
  String password = request.getParameter("password");
- String role = request.getParameter("role");
+ String scelta = request.getParameter("role");
+ String role = (scelta.equals("Admin")?"Admin":"User");
  
  RegisterBean registerBean = new RegisterBean();
  //Using Java Beans - An easiest way to play with group of related data

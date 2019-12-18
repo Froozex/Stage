@@ -5,7 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1 {font-family: "Montserrat", sans-serif}
+</style>
 <script> 
+
 function validate()
 { 
  var username = document.form.username.value; 
@@ -25,7 +32,7 @@ function validate()
 </script> 
 </head>
 <body>
-<div style="text-align:center"><h1>Login </h1> </div>
+<div class="w3-content" style="text-align:center"><h1>Login </h1> </div>
 <br>
 <form name="form" action="login" method="post" onsubmit="return validate()">
 <!-- Do not use table to format fields. As a good practice use CSS -->
@@ -44,7 +51,7 @@ function validate()
  </tr>
  <tr>
  <td></td>
- <td><input type="submit" value="Accedi"></input></td>
+ <td><input type="submit" value="Accedi" class="w3-bar-item w3-button w3-text-dark-grey w3-hover-black"></input></td>
  </tr>
 </table>
 </form>

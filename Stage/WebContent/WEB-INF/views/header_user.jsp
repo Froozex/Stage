@@ -8,7 +8,6 @@
 
 <style>       
     .navbar {
-
         height: 60px;
         line-height: 60px;
         
@@ -18,7 +17,6 @@
         height: 40px;
         line-height: 60px;
     }
-
 </style>
 
 <nav class="navbar navbar-inverse">

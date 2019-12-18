@@ -32,9 +32,9 @@ public class UserMngServlet extends HttpServlet {
 	
 public void init() {
         
-    	String jdbcURL = "jdbc:mysql://localhost:3306/utenti?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        String jdbcUsername = "root";
-        String jdbcPassword = "ludovico97";
+	String jdbcURL = "jdbc:mysql://localhost:3306/iif_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    String jdbcUsername = "root";
+    String jdbcPassword = "IIFLuca%Russo";
  
         usermngDao = new UserMngDao(jdbcURL, jdbcUsername, jdbcPassword);
     }

@@ -3,13 +3,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
 <html>
 <head>
  <title>Fascicolo Manager</title>
-
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  
+ <style>
+body,h1 {font-family: "Montserrat", sans-serif}
+</style>
+
+
+ <script> 
+function validate()
+{ 
+ var nomina = document.form.nomina.value; 
+ var procura = document.form.procura.value;
+ var pubblico_ministero = document.form.pubblico_ministero.value; 
+ var indagato = document.form.indagato.value;
+ var reato = document.form.reato.value
+ var consulente = document.form.consulente.value;
+ 
+ if (nomina==null || nomina=="")
+ { 
+ alert("Inserire la nomina!"); 
+ return false; 
+ }
+ else if(procura==null || procura=="")
+ { 
+ alert("Inserire la procura!"); 
+ return false; 
+ } 
+ if (pubblico_ministero==null || pubblico_ministero=="")
+ { 
+ alert("Inserire il Pubblico Ministero!"); 
+ return false; 
+ }
+ if (indagato==null || indagato=="")
+ { 
+ alert("Inserire il nome e cognome dell'indagato!"); 
+ return false; 
+ }
+ if (reato==null || reato=="")
+ { 
+ alert("Inserire il reato dell'indagato!"); 
+ return false; 
+ }
+ if (consulente==null || consulente=="")
+ { 
+ alert("Inserire il nome del consulente!"); 
+ return false; 
+ }
+}
+</script> 
 </head>
+
 
 <% //In case, if Admin/User session is not set, redirect to Login page
 if(request.getSession(false).getAttribute("Admin")== null || request.getSession(false).getAttribute("User")== null)
@@ -18,50 +69,49 @@ if(request.getSession(false).getAttribute("Admin")== null || request.getSession(
 <jsp:forward page="/WEB-INF/views/login.jsp"></jsp:forward>
 <%} %>
 
+
 <body>
- <center>
+<div class="w3-content" style="text-align:center">
   <h1>Fascicolo Manager</h1>
         <h2>
         <a href="home">Home Page</a>
-        &nbsp;&nbsp;&nbsp;
-         <a href="fascicoli">Torna ai Fascicoli</a>
-         
+        &nbsp;&nbsp;&nbsp; <a href="fascicoli">Lista Fascicoli</a>
         </h2>
- </center>
-    <div align="center">
-  <c:if test="${fasc != null}">
-   <form action="updatefascicolo" method="post" onsubmit="return validate()" enctype="multipart/form-data">
-        </c:if>
-        <c:if test="${fasc == null}">
-   <form action="insertfascicolo" method="post" onsubmit="return validate()" enctype="multipart/form-data">
-        </c:if>
-        <table border="1" cellpadding="5">
-            <caption>
-             <h2>
-              <c:if test="${fasc != null}">
+
+        
+  
+  <div>
+      <h2>
+         <c:if test="${fasc != null}">
                Modifica Fascicolo
               </c:if>
+              </h2>
+              <h2>
               <c:if test="${fasc == null}">
-               Aggiungi Nuovo Fascicolo
+               Nuovo Fascicolo
               </c:if>
              </h2>
-            </caption>
+            </div>
+            <c:choose>
+  <c:when test="${fasc != null}">
+  <form action="updatefascicolo" method="post" onsubmit="return validate()" enctype="multipart/form-data">
+        </c:when>
+        <c:otherwise>
+   <form action="insertfascicolo" method="post" onsubmit="return validate()" enctype="multipart/form-data">
+        </c:otherwise>
+        </c:choose>
+        <div align="center" >
+        <table class="w3-content" border="1" cellpadding="5"  >
+            
           <c:if test="${fasc != null}">
            <input type="hidden" name="id" value="<c:out value='${fasc.id}' />" />
           </c:if>            
             <tr>
                 <th>Nomina: </th>
                 <td>
-                <c:if test="${fasc != null}">
                  <input type="text" name="nomina" size="10"
                    value="<c:out value='${fasc.nomina}' />"
                   />
-                  </c:if>
-                  <c:if test="${fasc == null}">
-                 <input type="text" name="nomina" size="10"
-                   value="<c:out value='${fasc.nomina}' />"
-                  />
-                  </c:if>   
                 </td>
             </tr>
             <tr>
@@ -159,16 +209,14 @@ if(request.getSession(false).getAttribute("Admin")== null || request.getSession(
                 <tr>
                 <th>Relazione: </th>
                 <td>
-                 <input type="file" name="relazione"
-                   value="<c:out value='${fasc.relazione}' />"
-                 />
                  <c:choose>
-                 <c:when test= "<c:out value='${relazione}' />== null">
+                 <c:when test= "<c:out value='${fasc.relazione}' />== null">
                  <input type="file" name="relazione" id= "Inserisci il file della relazione">
                  <input type="button" name="doc" id= "...Oppure creane uno nuovo.">
                   </c:when>  
                    <c:otherwise>  
-                   <a href="relazione_<c:out value='${fasc.nomina}'/>.docx">relazione_<c:out value='${fasc.nomina}'/>.docx</a> <c:out value="${relazione}" />
+                   <a href="download"><c:out value='${fasc.nomina}'/>.docx </a>
+                   
                    <input type="file" name="relazione" value= "Inserisci un altro file della relazione" >
                   </c:otherwise>
 				</c:choose>
@@ -176,29 +224,31 @@ if(request.getSession(false).getAttribute("Admin")== null || request.getSession(
                 <tr>
                 <th>Richiesta Spese: </th>
                 <td>
-                 <c:set var="cost" value='${fasc.costo}'/>
-                 <input type="radio" name="costo"
-                 value="SI" <c:if test="${cost.contains('SI')}">checked</c:if>>SI
-                 <input type="radio" name="costo"
-                 value="NO" <c:if test="${cost.contains('NO')}">checked</c:if>>NO 
-                 
+                <c:set var="cost" value='${fasc.costo}'/>
+					<input type="radio" name="costo" 
+            		value="SI" <c:if test="${cost.contains('SI')}">checked</c:if>>SI
+					<input type="radio" name="costo" 
+           		    value="NO" <c:if test="${cost.contains('NO')}">checked</c:if>>NO
                 </td>
                 <tr>
                 <th>Pagamento avvenuto: </th>
                 <td>
                 <c:set var="payment" value='${fasc.pagamento}'/>
-                 <input type="radio" name="pagamento"
-                 value="SI" <c:if test="${payment.contains('SI')}">checked</c:if>>SI
-                 <input type="radio" name="pagamento"
-                 value="NO" <c:if test="${payment.contains('NO')}">checked</c:if>>NO                 
+					<input type="radio" name="pagamento" 
+            		value="SI" <c:if test="${payment.contains('SI')}">checked</c:if>>SI
+					<input type="radio" name="pagamento" 
+           		    value="NO" <c:if test="${payment.contains('NO')}">checked</c:if>>NO
                 </td>
             <tr>
              <td colspan="2" align="center">
-              <input type="submit" value="Salva" />
+              <input type="submit" class="w3-button w3-dark-grey" value="Salva" />
              </td>
-            </tr>
+           </tr>
         </table>
-        </form>
     </div> 
+    
+    </div>
+    </form>
+    </form>
 </body>
 </html>

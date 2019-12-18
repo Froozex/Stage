@@ -25,133 +25,133 @@ public class RepertoServlet extends HttpServlet {
 
   public void init() {
       
-  	String jdbcURL = "jdbc:mysql://localhost:3306/utenti?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    String jdbcURL = "jdbc:mysql://localhost:3306/iif_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
       String jdbcUsername = "root";
-      String jdbcPassword = "ludovico97";
+      String jdbcPassword = "IIFLuca%Russo";
 
       repertoDao = new RepertoDao(jdbcURL, jdbcUsername, jdbcPassword);
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-  throws ServletException, IOException {
-      doGet(request, response);
-  }
+		  throws ServletException, IOException {
+		      doGet(request, response);
+		  }
 
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-  throws ServletException, IOException {
-  	
-  	String action = request.getServletPath();
-  	System.out.println(action);
-  	System.out.println("received HTTP GET");
+		  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+		  throws ServletException, IOException {
+		  	
+		  	String action = request.getServletPath();
+		  	System.out.println(action);
+		  	System.out.println("received HTTP GET");
 
-      try {
-      	System.out.println("entra nel try");
-      	System.out.println(action);
-          if (action.equals("/newreperto")) {
-          	System.out.println("esegue newreperto");
-              newReperto(request, response);}
-          else if(action.equals("/insertreperto")) {
-          	insertReperto(request, response);}
-          else if(action.equals("/deletereperto")) {
-          	deleteReperto(request, response);}
-          else if(action.equals("/editreperto")) {
-            	editReperto(request, response);}
-          else if(action.equals("/updatereperto")) {
-          	updateReperto(request, response);}
-          else {listReperto(request, response);}
-              /*case "fascicoli/new":
-              	System.out.println("porcamadonna new");
-                  newFascicolo(request, response);
-                  break;
-              case "fascicoli/insert":
-                  insertFascicolo(request, response);
-                  break;
-              case "fascicoli/delete":
-                  deleteFascicolo(request, response);
-                  break;
-              case "fascicoli/edit":
-                  editFascicolo(request, response);
-                  break;
-              case "fascicoli/update":
-                  updateFascicolo(request, response);
-                  break;
-              default:
-              	System.out.println("default di merda");
-                  listFascicolo(request, response);
-                  break;
-          }*/
-      } catch (SQLException ex) {
-          throw new ServletException(ex);
-      }
-  }
+		      try {
+		      	System.out.println("entra nel try");
+		      	System.out.println(action);
+		          if (action.equals("/newreperto")) {
+		          	System.out.println("esegue newreperto");
+		              newReperto(request, response);}
+		          else if(action.equals("/insertreperto")) {
+		          	insertReperto(request, response);}
+		          else if(action.equals("/deletereperto")) {
+		          	deleteReperto(request, response);}
+		          else if(action.equals("/editreperto")) {
+		            	editReperto(request, response);}
+		          else if(action.equals("/updatereperto")) {
+		          	updateReperto(request, response);}
+		          else {listReperto(request, response);}
+		              /*case "fascicoli/new":
+		              	System.out.println("porcamadonna new");
+		                  newFascicolo(request, response);
+		                  break;
+		              case "fascicoli/insert":
+		                  insertFascicolo(request, response);
+		                  break;
+		              case "fascicoli/delete":
+		                  deleteFascicolo(request, response);
+		                  break;
+		              case "fascicoli/edit":
+		                  editFascicolo(request, response);
+		                  break;
+		              case "fascicoli/update":
+		                  updateFascicolo(request, response);
+		                  break;
+		              default:
+		              	System.out.println("default di merda");
+		                  listFascicolo(request, response);
+		                  break;
+		          }*/
+		      } catch (SQLException ex) {
+		          throw new ServletException(ex);
+		      }
+		  }
 
-  private void listReperto(HttpServletRequest request, HttpServletResponse response)
-  throws SQLException, IOException, ServletException {
-      
-	  String path = request.getParameter("nomina");
-	  List < RepertoInfo > listRep = repertoDao.ListAllReperti(path);
-      request.setAttribute("listRep", listRep);
-      RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/reperto-list.jsp");
-      dispatcher.forward(request, response);
-  }
+		  private void listReperto(HttpServletRequest request, HttpServletResponse response)
+		  throws SQLException, IOException, ServletException {
+		      
+			  String path = request.getParameter("nomina");
+			  List < RepertoInfo > listRep = repertoDao.ListAllReperti(path);
+		      request.setAttribute("listRep", listRep);
+		      RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/reperto-list.jsp");
+		      dispatcher.forward(request, response);
+		  }
 
-  private void newReperto(HttpServletRequest request, HttpServletResponse response)
-  throws ServletException, IOException {
-      RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/reperto-form.jsp");
-      dispatcher.forward(request, response);
-  }
+		  private void newReperto(HttpServletRequest request, HttpServletResponse response)
+		  throws ServletException, IOException {
+		      RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/reperto-form.jsp");
+		      dispatcher.forward(request, response);
+		  }
 
-  private void editReperto(HttpServletRequest request, HttpServletResponse response)
-  throws SQLException, ServletException, IOException {
-      String numrep = request.getParameter("nreperto");
-      RepertoInfo existingRep = repertoDao.getReperto(numrep);
-      RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/reperto-form.jsp");
-      request.setAttribute("rep", existingRep);
-      dispatcher.forward(request, response);
+		  private void editReperto(HttpServletRequest request, HttpServletResponse response)
+		  throws SQLException, ServletException, IOException {
+		      String numrep = request.getParameter("nreperto");
+		      RepertoInfo existingRep = repertoDao.getReperto(numrep);
+		      RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/reperto-form.jsp");
+		      request.setAttribute("rep", existingRep);
+		      dispatcher.forward(request, response);
 
-  }
+		  }
 
-  private void insertReperto(HttpServletRequest request, HttpServletResponse response)
-  throws SQLException, IOException {
-  	 
-  	   String nomina = request.getParameter("nomina");
-       String nreperto = request.getParameter("nreperto");
-       String sequestrato = request.getParameter("sequestrato");
-       String supporto = request.getParameter("supporto");
-       String seriale = request.getParameter("seriale");
-       String note = request.getParameter("note");
-       String operazioni = request.getParameter("operazioni");
+		  private void insertReperto(HttpServletRequest request, HttpServletResponse response)
+		  throws SQLException, IOException {
+		  	 
+		  	   String nomina = request.getParameter("nomina");
+		       String nreperto = request.getParameter("nreperto");
+		       String sequestrato = request.getParameter("sequestrato");
+		       String supporto = request.getParameter("supporto");
+		       String seriale = request.getParameter("seriale");
+		       String note = request.getParameter("note");
+		       String operazioni = request.getParameter("operazioni");
 
-       RepertoInfo newrep = new RepertoInfo(nomina, nreperto, sequestrato, supporto, seriale, note, operazioni);
-       repertoDao.insertReperto(newrep);
-       
-   	 response.sendRedirect("reperti?nomina="+nomina);
-  }
+		       RepertoInfo newrep = new RepertoInfo(nomina, nreperto, sequestrato, supporto, seriale, note, operazioni);
+		       repertoDao.insertReperto(newrep);
+		       
+		   	 response.sendRedirect("reperti?nomina="+nomina);
+		  }
 
-  private void updateReperto(HttpServletRequest request, HttpServletResponse response)
-  throws SQLException, IOException {
-  	
-  	  String nomina = request.getParameter("nominarep");
-      String nreperto = request.getParameter("nreperto");
-      String sequestrato = request.getParameter("sequestrato");
-      String supporto = request.getParameter("supporto");
-      String seriale = request.getParameter("seriale");
-      String note = request.getParameter("note");
-      String operazioni = request.getParameter("operazioni");
+		  private void updateReperto(HttpServletRequest request, HttpServletResponse response)
+		  throws SQLException, IOException {
+		  	
+		  	  String nomina = request.getParameter("nominarep");
+		      String nreperto = request.getParameter("nreperto");
+		      String sequestrato = request.getParameter("sequestrato");
+		      String supporto = request.getParameter("supporto");
+		      String seriale = request.getParameter("seriale");
+		      String note = request.getParameter("note");
+		      String operazioni = request.getParameter("operazioni");
 
-      RepertoInfo rep = new RepertoInfo(nomina, nreperto, sequestrato, supporto, seriale, note, operazioni);
-      repertoDao.updateReperto(rep);
-      System.out.println(rep);
-      response.sendRedirect("reperti?nomina="+nomina);
-  }
+		      RepertoInfo rep = new RepertoInfo(nomina, nreperto, sequestrato, supporto, seriale, note, operazioni);
+		      repertoDao.updateReperto(rep);
+		      System.out.println(rep);
+		      response.sendRedirect("reperti?nomina="+nomina);
+		  }
 
-  private void deleteReperto(HttpServletRequest request, HttpServletResponse response)
-  throws SQLException, IOException {
-      String nomina = request.getParameter("nomina");
-      
-      RepertoInfo  rep = new RepertoInfo(nomina);
-      repertoDao.deleteReperto(rep);
-      System.out.println("Reperto rimosso?");
-      response.sendRedirect("reperti?nomina="+nomina);
-  }
-}
+		  private void deleteReperto(HttpServletRequest request, HttpServletResponse response)
+		  throws SQLException, IOException {
+		      String nomina = request.getParameter("nomina");
+		      
+		      RepertoInfo  rep = new RepertoInfo(nomina);
+		      repertoDao.deleteReperto(rep);
+		      System.out.println("Reperto rimosso?");
+		      response.sendRedirect("reperti?nomina="+nomina);
+		  }
+		}

@@ -6,6 +6,25 @@
 <html>
 <head>
  <title>Lista reperti</title>
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ <style>
+ body,h1 {font-family: "Montserrat", sans-serif}
+ 
+thead, tbody tr {
+      display:table;
+      width: 2000px;
+      table-layout:fixed;
+  }
+  thead {
+      width: calc( 2000px - 2em )
+  } 
+
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
 </head>
 
 <% //In case, if Admin/User session is not set, redirect to Login page
@@ -15,22 +34,22 @@ if(request.getSession(false).getAttribute("Admin")== null || request.getSession(
 <jsp:forward page="/WEB-INF/views/login.jsp"></jsp:forward>
 <%} %>
 
-<body>
- <center>
+<body class="w3-content">
+<div class="w3-content" style="text-align:center">
   <h1>Reperti</h1>
-  <h3>Reperto della Nomina<b> <%=request.getAttribute("nomina") %>!</b></h3>
+  <h3>Reperto della Nomina<b> <c:out value='<%=request.getAttribute("nomina")%>'/>!</b></h3>
         <h2>
         <a href="fascicoli">Torna ai Fascicoli</a>
         &nbsp;&nbsp;&nbsp;
          <a href="newreperto">Aggiungi Nuovo Reperto</a>
          &nbsp;&nbsp;&nbsp;
          
-         
         </h2>
- </center>
-    <div align="center">
-        <table border="1" cellpadding="5">
-            <caption><h2>Lista Reperti</h2></caption>
+        <h1>Lista Reperti</h1>
+ </div>
+    <div align="center" style="overflow-x:auto;">
+        <table border="1" cellpadding="5" class="w3-table-all" class="w3-table-all w3-margin-top" id="myTable">
+            
             <tr>
                 <th></th>
                 <th>Nomina</th>

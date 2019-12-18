@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xmlns="http://java.sun.com/xml/ns/javaee"
-      xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
+      xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_1_0.xsd"
      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-                       http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
-     id="WebApp_ID" version="4.0">
+                       http://java.sun.com/xml/ns/javaee/web-app_1_0.xsd"
+     id="WebApp_ID" version="1.0">
  <display-name>Forensics Data Manager</display-name>
  
  <context-param>
         <param-name>jdbcURL</param-name>
-        <param-value>jdbc:mysql://localhost:3306/users?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC</param-value>
+        <param-value>jdbc:mysql://localhost:3306/iif_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC</param-value>
     </context-param>
  
     <context-param>
@@ -19,7 +19,7 @@
  
     <context-param>
         <param-name>jdbcPassword</param-name>
-        <param-value>ludovico97</param-value>
+        <param-value>IIFLuca%Russo</param-value>
     </context-param>
  
  
@@ -72,4 +72,13 @@
  <url-pattern>/fascioli</url-pattern>
  
  </servlet-mapping>
+ 
+ <servlet>
+     <servlet-name>DownloadServlet</servlet-name>
+     <servlet-class>com.stage.project.data.DownloadServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+     <servlet-name>DownloadServlet</servlet-name>
+     <url-pattern>/download</url-pattern>
+</servlet-mapping>
 </web-app>
