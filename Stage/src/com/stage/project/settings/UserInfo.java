@@ -1,12 +1,26 @@
-package com.stage.project.auth;
+package com.stage.project.settings;
 
-public class RegisterBean {
-	 
-	 private String fullName;
+public class UserInfo {
+	
+	private String fullName;
 	 private String email;
 	 private String userName;
 	 private String password;
 	 private String role;
+	 
+	 public UserInfo(String fullName, String email, String userName, String role) {
+		 
+		 this.fullName = fullName;
+		 this.email = email;
+		 this.userName = userName;
+		 this.role = role;
+	 }
+	 
+public UserInfo(String email) {
+		 
+		 this.email = email;
+		 
+	 }
 	 
 	 public String getUserName() {
 	 return userName;
@@ -38,4 +52,5 @@ public class RegisterBean {
 	 public String getRole() {
 	 return role;
 	 }
-	}
+
+}

@@ -14,8 +14,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
+
+import com.stage.project.auth.LoginBean;
 
 
 
@@ -26,7 +29,7 @@ public class FascicoloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private FascicoloDao fascicoloDao;
-	InputStream inputStream = null;
+	InputStream relazione = null;
 
     public void init() {
         
@@ -39,7 +42,8 @@ public class FascicoloServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        doGet(request, response);
+        
+    	doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -147,21 +151,21 @@ public class FascicoloServlet extends HttpServlet {
              System.out.println(filePart.getContentType());
 
              // obtains input stream of the upload file
-             inputStream = filePart.getInputStream();}
-         String costo = request.getParameter("costo");
-         String pagamento = request.getParameter("pagamento");
+             relazione = filePart.getInputStream();}
+         String scelta1 = request.getParameter("costo");
+         String costo = (scelta1.equals("SI")?"SI":"NO");
+         String scelta = request.getParameter("pagamento");
+         String pagamento = (scelta.equals("SI")?"SI":"NO");
 
          FascicoloInfo newfasc = new FascicoloInfo(id, nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, costo, pagamento);
-         fascicoloDao.insertFascicolo(newfasc, inputStream);
+         fascicoloDao.insertFascicolo(newfasc);
      	 response.sendRedirect("fascicoli");
     }
 
     private void updateFascicolo(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException, IllegalStateException, ServletException {
     	
-    	
-    	
-        
+        String nomina = request.getParameter("nomina");
         String procura = request.getParameter("procura");
         String pm = request.getParameter("pm");
         String pg = request.getParameter("pg");
@@ -183,13 +187,15 @@ public class FascicoloServlet extends HttpServlet {
             System.out.println(filePart.getContentType());
 
             // obtains input stream of the upload file
-            inputStream = filePart.getInputStream();}
-        String costo = request.getParameter("costo");
-        String pagamento = request.getParameter("pagamento");
+            relazione = filePart.getInputStream();}
+        String scelta1 = request.getParameter("costo");
+        String costo = (scelta1.equals("SI")?"SI":"NO");
+        String scelta2 = request.getParameter("pagamento");
+        String pagamento = (scelta2.equals("SI")?"SI":"NO");
 
-        FascicoloInfo fasc = new FascicoloInfo(procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico,
-					d_inizio, giorni, scadenza, proroga, richiesta, costo, pagamento);
-        fascicoloDao.updateFascicolo(fasc, inputStream);
+        FascicoloInfo fasc = new FascicoloInfo(nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico,
+					d_inizio, giorni, scadenza, proroga, richiesta,relazione, costo, pagamento);
+        fascicoloDao.updateFascicolo(fasc);
         response.sendRedirect("fascicoli");
     }
 
@@ -198,7 +204,7 @@ public class FascicoloServlet extends HttpServlet {
         String nomina = request.getParameter("nomina");
         
         FascicoloInfo  fasc = new FascicoloInfo(nomina);
-        fascicoloDao.deleteFascicolo(fasc, inputStream);
+        fascicoloDao.deleteFascicolo(fasc);
         response.sendRedirect("fascicoli");
     }
     

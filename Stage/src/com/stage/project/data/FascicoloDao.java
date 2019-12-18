@@ -24,7 +24,7 @@ public class FascicoloDao {
 	private String jdbcUsername;
 	private String jdbcPassword;
 	private Connection jdbcConnection;
-	InputStream input = null;
+	InputStream relazione = null;
 	FileOutputStream output = null;
 	
 	public FascicoloDao(String jdbcURL, String jdbcUsername, String jdbcPassword)	{
@@ -52,7 +52,7 @@ public class FascicoloDao {
         }
     }
     
-    public boolean insertFascicolo(FascicoloInfo fasc, InputStream relazione) throws SQLException {
+    public boolean insertFascicolo(FascicoloInfo fasc) throws SQLException {
     	
     	String sql = "INSERT INTO fascicolo (nomina, procura, pubblico_ministero, polizia_giudiziaria, indagato, reato, consulente, ausiliario, data_affidamento_incarico, data_inizio_operazioni, giorni_concessi, scadenza, proroga, richiesta_gestori, relazione, richiesta_spese, pagamento_avvenuto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     	connect();
@@ -90,32 +90,33 @@ public class FascicoloDao {
      * Update fascicolo
      * @param fasc
      */
-    public boolean updateFascicolo(FascicoloInfo fasc, InputStream relazione) throws SQLException {
-        String sql = "UPDATE fascicolo SET procura = ?, pubblico_ministero = ?, polizia_giudiziaria = ?, indagato = ?, reato = ?, consulente = ?, ausiliario = ?, data_affidamento_incarico = ?, data_inizio_operazioni = ?, giorni_concessi = ?, scadenza = ?, proroga = ?, richiesta_gestori = ?, relazione = ?, richiesta_spese = ?, pagamento_avvenuto = ? WHERE nomina = ?";
+    public boolean updateFascicolo(FascicoloInfo fasc) throws SQLException {
+        String sql = "UPDATE fascicolo SET nomina =?, procura = ?, pubblico_ministero = ?, polizia_giudiziaria = ?, indagato = ?, reato = ?, consulente = ?, ausiliario = ?, data_affidamento_incarico = ?, data_inizio_operazioni = ?, giorni_concessi = ?, scadenza = ?, proroga = ?, richiesta_gestori = ?, relazione = ?, richiesta_spese = ?, pagamento_avvenuto = ? WHERE nomina = ?";
         connect();
          
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setString(17, fasc.getNomina());
-        statement.setString(1, fasc.getProcura());
-        statement.setString(2, fasc.getPm());
-        statement.setString(3, fasc.getPg());
-        statement.setString(4, fasc.getIndagato());
-        statement.setString(5, fasc.getReato());
-        statement.setString(6, fasc.getConsulente());
-        statement.setString(7, fasc.getAusiliario());
-        statement.setString(8, fasc.getD_incarico());
-        statement.setString(9, fasc.getD_inizio());
-        statement.setInt(10, fasc.getGiorni());
-        statement.setString(11, fasc.getScadenza());
-        statement.setInt(12, fasc.getProroga());
-        statement.setString(13, fasc.getRichiesta());
+        statement.setString(1, fasc.getNomina());
+        statement.setString(2, fasc.getProcura());
+        statement.setString(3, fasc.getPm());
+        statement.setString(4, fasc.getPg());
+        statement.setString(5, fasc.getIndagato());
+        statement.setString(6, fasc.getReato());
+        statement.setString(7, fasc.getConsulente());
+        statement.setString(8, fasc.getAusiliario());
+        statement.setString(9, fasc.getD_incarico());
+        statement.setString(10, fasc.getD_inizio());
+        statement.setInt(11, fasc.getGiorni());
+        statement.setString(12, fasc.getScadenza());
+        statement.setInt(13, fasc.getProroga());
+        statement.setString(14, fasc.getRichiesta());
         
         if(relazione != null) {
-        	statement.setBlob(14, relazione);
+        	statement.setBlob(15, relazione);
         }
         
-        statement.setString(15, fasc.getCosto());
-        statement.setString(16, fasc.getPagamento());
+        statement.setString(16, fasc.getCosto());
+        statement.setString(17, fasc.getPagamento());
+        statement.setString(18, fasc.getNomina());
         System.out.println("modifica");
          
         boolean rowUpdated = statement.executeUpdate() > 0;
@@ -128,7 +129,7 @@ public class FascicoloDao {
      * Delete fascicolo
      * @param nomina
      */
-        public boolean deleteFascicolo(FascicoloInfo fasc, InputStream relazione) throws SQLException {
+        public boolean deleteFascicolo(FascicoloInfo fasc) throws SQLException {
             String sql = "DELETE FROM fascicolo where nomina = ?";
              
             connect();
@@ -177,16 +178,16 @@ public class FascicoloDao {
         	String scadenza = resultSet.getString("scadenza");
         	int proroga = resultSet.getInt("proroga");
         	String richiesta = resultSet.getString("richiesta_gestori");
-        	input = resultSet.getBinaryStream("relazione"); 
+        	relazione = resultSet.getBinaryStream("relazione"); 
 
         	byte[] buffer = new byte[1024];
-			while (input.read(buffer) > 0) {
+			while (relazione.read(buffer) > 0) {
 				output.write(buffer);
 			}
         	String costo = resultSet.getString("richiesta_spese");
         	String pagamento = resultSet.getString("pagamento_avvenuto");
         	
-        	fasc = new FascicoloInfo(nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, costo, pagamento);
+        	fasc = new FascicoloInfo(nomina, procura, pm, pg, indagato, reato, consulente, ausiliario, d_incarico, d_inizio, giorni, scadenza, proroga, richiesta, relazione, costo, pagamento);
         	
         }
          
@@ -232,10 +233,10 @@ public class FascicoloDao {
         	String scadenza = resultSet.getString("scadenza");
         	int proroga = resultSet.getInt("proroga");
         	String richiesta = resultSet.getString("richiesta_gestori");
-        	input = resultSet.getBinaryStream("relazione"); 
+        	relazione = resultSet.getBinaryStream("relazione"); 
 
         	byte[] buffer = new byte[1024];
-			while (input.read(buffer) > 0) {
+			while (relazione.read(buffer) > 0) {
 				output.write(buffer);
 			}
         	String costo = resultSet.getString("richiesta_spese");

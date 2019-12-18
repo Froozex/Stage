@@ -32,7 +32,7 @@ public class FascicoloInfo {
  
  public FascicoloInfo(String nomina, String procura, String pm, String pg, String indagato, String reato,
 		 		String consulente, String ausiliario, String d_incarico, String d_inizio, int giorni, String scadenza,
-		 		int proroga, String richiesta, String costo, String pagamento) {
+		 		int proroga, String richiesta,InputStream relazione, String costo, String pagamento) {
   super();
   this.nomina = nomina;
   this.procura = procura;
@@ -48,7 +48,7 @@ public class FascicoloInfo {
   this.scadenza = scadenza;
   this.proroga = proroga;
   this.richiesta = richiesta;
-  //this.relazione = relazione;
+  this.relazione = relazione;
   this.costo = costo;
   this.pagamento = pagamento;
  }

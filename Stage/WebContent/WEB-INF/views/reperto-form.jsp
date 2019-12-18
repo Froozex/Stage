@@ -8,6 +8,14 @@
 <head>
  <title>Reperto Manager</title>
 </head>
+
+<% //In case, if Admin/User session is not set, redirect to Login page
+if(request.getSession(false).getAttribute("Admin")== null || request.getSession(false).getAttribute("User")== null)
+{
+%>
+<jsp:forward page="/WEB-INF/views/login.jsp"></jsp:forward>
+<%} %>
+
 <body>
  <center>
   <h1>Reperti</h1>
@@ -45,13 +53,13 @@
                 <th>Nomina : </th>
                 <td>
                 <c:if test="${rep != null}">
-                 <input type="text" name="nomina" size="10"
-                   value="<c:out value='${rep.nomina}' />"disabled
+                 <input type="text" name="nominarep" size="10"
+                   value="<c:out value='${rep.nomina}' />"
                  />
                  </c:if>
                  <c:if test="${rep == null}">
                  <input type="text" name="nomina" size="10"
-                   value="<c:out value='${rep.nomina}' />"
+                   value="<c:out value='${fasc.nomina}' />"
                  />
                  </c:if>
                 </td>

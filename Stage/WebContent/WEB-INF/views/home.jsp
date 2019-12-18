@@ -1,3 +1,4 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -10,13 +11,33 @@
      <meta charset="UTF-8">
      <title>FDM</title>
   </head>
+  
+  <c:choose>
+  <c:when test="${not empty Admin}">
+    <%@ include file="header_admin.jsp" %>
+  </c:when>
+  <c:when test="${not empty User}">
+    <%@ include file="header_user.jsp" %>
+  </c:when>
+  <c:otherwise>
+    <jsp:forward page="/WEB-INF/views/login.jsp"></jsp:forward>
+  </c:otherwise>
+</c:choose>
+  
+  
+  
+  
+  
+  
+  
+  
   <body>
   
   
  
-     <jsp:include page="header.jsp"></jsp:include>
+     
     
-      <h3>Benvenuto<b> <%=request.getAttribute("userName") %>!</b></h3>
+      <h3>Benvenuto<b> <%=request.getAttribute("role") %> <%=request.getAttribute("userName") %>!</b></h3>
       
       Gestisci qui i tuoi fascicoli forensi! <br><br>
 

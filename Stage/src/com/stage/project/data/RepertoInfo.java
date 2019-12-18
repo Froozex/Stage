@@ -7,7 +7,7 @@ public class RepertoInfo {
 
 
 protected int id;
-protected String nomina;
+protected String nominarep;
 protected String nreperto;
 protected String sequestrato;
 protected String supporto;
@@ -21,7 +21,7 @@ public RepertoInfo() {
 public RepertoInfo(String nominarep, String nreperto, String sequestrato, String supporto, String seriale, String note,
 		 		String operazioni) {
 super();
-this.nomina = nominarep;
+this.nominarep = nominarep;
 this.nreperto = nreperto;
 this.sequestrato = sequestrato;
 this.supporto = supporto;
@@ -42,7 +42,7 @@ this.operazioni = operazioni;
 }
 
 public RepertoInfo(String nominarep) {
-	 this.nomina = nominarep;
+	 this.nominarep = nominarep;
 }
 
 public int getId() {
@@ -53,10 +53,10 @@ this.id = id;
 }
 
 public String getNomina() {
-	  return nomina;
+	  return nominarep;
 	 }
 public void setNomina(String nomina) {
-	  this.nomina = nomina;
+	  this.nominarep = nomina;
 	 }
 
 public String getNreperto() {

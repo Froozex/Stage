@@ -14,6 +14,7 @@ public class RegisterDao {
  String email = registerBean.getEmail();
  String userName = registerBean.getUserName();
  String password = registerBean.getPassword();
+ String role = registerBean.getRole();
  
  Connection con = null;
  PreparedStatement preparedStatement = null;
@@ -21,12 +22,13 @@ public class RegisterDao {
  try
  {
  con = DBConnection.createConnection();
- String query = "insert into users(SlNo,fullName,Email,userName,password) values (NULL,?,?,?,?)"; //Insert user details into the table 'USERS'
+ String query = "insert into users(SlNo,fullName,Email,userName,password,role) values (NULL,?,?,?,?,?)"; //Insert user details into the table 'USERS'
  preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
  preparedStatement.setString(1, fullName);
  preparedStatement.setString(2, email);
  preparedStatement.setString(3, userName);
  preparedStatement.setString(4, password);
+ preparedStatement.setString(5, role);
  
  int i= preparedStatement.executeUpdate();
  

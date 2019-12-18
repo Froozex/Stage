@@ -13,6 +13,7 @@ function validate()
  var username = document.form.username.value; 
  var password = document.form.password.value;
  var conpassword= document.form.conpassword.value;
+ var role= document.form.role.value;
  
  if (fullname==null || fullname=="" || !fullname.contains(" "))
  { 
@@ -39,6 +40,10 @@ function validate()
  alert("La Password scelta e quella di conferma sono diverse!"); 
  return false; 
  } 
+ else if (role==null || role=="" || !role.contains("Admin") || !role.contains("User"))
+ {
+ alert("Il Ruolo deve essere Admin o User")
+ }	 
  } 
 </script> 
 </head>
@@ -66,6 +71,10 @@ function validate()
  	<td>Conferma Password</td>
  	<td><input type="password" name="conpassword" /></td>
  	</tr>
+ 	<tr>
+	 <td>Ruolo</td>
+	 <td><input type="text" name="role" /></td>
+	 </tr>
  	<tr>
  	<td><%=(request.getAttribute("errMessage") == null) ? ""
 	 : request.getAttribute("errMessage")%></td>

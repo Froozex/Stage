@@ -10,6 +10,14 @@
 
  
 </head>
+
+<% //In case, if Admin/User session is not set, redirect to Login page
+if(request.getSession(false).getAttribute("Admin")== null || request.getSession(false).getAttribute("User")== null)
+{
+%>
+<jsp:forward page="/WEB-INF/views/login.jsp"></jsp:forward>
+<%} %>
+
 <body>
  <center>
   <h1>Fascicolo Manager</h1>
@@ -46,7 +54,7 @@
                 <td>
                 <c:if test="${fasc != null}">
                  <input type="text" name="nomina" size="10"
-                   value="<c:out value='${fasc.nomina}' />"disabled
+                   value="<c:out value='${fasc.nomina}' />"
                   />
                   </c:if>
                   <c:if test="${fasc == null}">
@@ -168,16 +176,21 @@
                 <tr>
                 <th>Richiesta Spese: </th>
                 <td>
-                 <input type="text" name="costo" size="45"
-                   value="<c:out value='${fasc.costo}' />"
-                 />
+                 <c:set var="cost" value='${fasc.costo}'/>
+                 <input type="radio" name="costo"
+                 value="SI" <c:if test="${cost.contains('SI')}">checked</c:if>>SI
+                 <input type="radio" name="costo"
+                 value="NO" <c:if test="${cost.contains('NO')}">checked</c:if>>NO 
+                 
                 </td>
                 <tr>
                 <th>Pagamento avvenuto: </th>
                 <td>
-                 <input type="radio" name="pagamento" value=""<c:out value='${fasc.pagamento}' /> />SI
-                 <input type="radio" name="pagamento" value=""<c:out value='${fasc.pagamento}' /> />NO
-                 
+                <c:set var="payment" value='${fasc.pagamento}'/>
+                 <input type="radio" name="pagamento"
+                 value="SI" <c:if test="${payment.contains('SI')}">checked</c:if>>SI
+                 <input type="radio" name="pagamento"
+                 value="NO" <c:if test="${payment.contains('NO')}">checked</c:if>>NO                 
                 </td>
             <tr>
              <td colspan="2" align="center">

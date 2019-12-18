@@ -7,6 +7,40 @@
 <head>
  <title>Lista fascicoli</title>
 </head>
+
+<%=request.getAttribute("userName") %>
+
+<style>
+
+table.custom_class {
+    border:solid 5px #006CFF;
+    margin:0px;
+    padding:0px;
+    border-spacing:0px;
+    border-collapse:collapse;
+    line-height:22px;
+    font-size:13px;
+    font-family:Arial, Verdana, Tahoma, Helvetica, sans-serif;
+    font-weight:400;
+    text-decoration:none;
+    color:#0018ff; 
+    white-space:pre-wrap;
+}
+table.custom_class th {
+  padding: 5px;
+  background-color:#98dcff;
+  border:solid 2px #006CFF;
+}
+table.custom_class td {
+  padding: 10px;
+  border:solid 1px #006CFF;
+}
+table.custom_class tr {
+    margin:0;
+    padding:4px;
+}
+</style>
+
 <body>
  <center>
   <h1>Fascicoli</h1>
@@ -24,7 +58,7 @@
         </h2>
  </center>
     <div align="center">
-        <table border="1" cellpadding="5">
+        <table class="custom_class" border="1" cellpadding="5">
             <caption><h2>Lista Fascicoli</h2></caption>
             <tr>
                 <th></th>

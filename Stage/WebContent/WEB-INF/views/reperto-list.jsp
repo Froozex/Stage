@@ -7,6 +7,14 @@
 <head>
  <title>Lista reperti</title>
 </head>
+
+<% //In case, if Admin/User session is not set, redirect to Login page
+if(request.getSession(false).getAttribute("Admin")== null || request.getSession(false).getAttribute("User")== null)
+{
+%>
+<jsp:forward page="/WEB-INF/views/login.jsp"></jsp:forward>
+<%} %>
+
 <body>
  <center>
   <h1>Reperti</h1>

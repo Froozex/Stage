@@ -103,7 +103,7 @@ public class RepertoServlet extends HttpServlet {
 
   private void editReperto(HttpServletRequest request, HttpServletResponse response)
   throws SQLException, ServletException, IOException {
-      String numrep = request.getParameter("numero_reperto");
+      String numrep = request.getParameter("nreperto");
       RepertoInfo existingRep = repertoDao.getReperto(numrep);
       RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/reperto-form.jsp");
       request.setAttribute("rep", existingRep);
@@ -131,7 +131,7 @@ public class RepertoServlet extends HttpServlet {
   private void updateReperto(HttpServletRequest request, HttpServletResponse response)
   throws SQLException, IOException {
   	
-  	  //String nomina = request.getParameter("nomina");
+  	  String nomina = request.getParameter("nominarep");
       String nreperto = request.getParameter("nreperto");
       String sequestrato = request.getParameter("sequestrato");
       String supporto = request.getParameter("supporto");
@@ -139,10 +139,10 @@ public class RepertoServlet extends HttpServlet {
       String note = request.getParameter("note");
       String operazioni = request.getParameter("operazioni");
 
-      RepertoInfo rep = new RepertoInfo(nreperto, sequestrato, supporto, seriale, note, operazioni);
+      RepertoInfo rep = new RepertoInfo(nomina, nreperto, sequestrato, supporto, seriale, note, operazioni);
       repertoDao.updateReperto(rep);
       System.out.println(rep);
-      response.sendRedirect("reperti");
+      response.sendRedirect("reperti?nomina="+nomina);
   }
 
   private void deleteReperto(HttpServletRequest request, HttpServletResponse response)
